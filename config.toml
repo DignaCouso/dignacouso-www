@@ -2,3 +2,7 @@ baseURL = "https://dignacouso.me/"
 languageCode = "ca"
 defaultContentLanguage = "ca"
 title = "Digna Couso"
+theme = "hyde"
+[params]
+  description = "Professora agregada, Universitat Autònoma de Barcelona."
+  twitter = "DignaCouso"
