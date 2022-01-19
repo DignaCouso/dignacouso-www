@@ -16,7 +16,6 @@
     {{ end }}
   </head>
   <body>
-    {{ block "main" . }}
     <div class="container mx-auto">
       <section class="m-6">
         <div class="text-2xl text-grey-400">
@@ -48,14 +47,8 @@
         </nav>
       </section>
 
-      <section class="m-6">
-        <div class="text-2xl text-grey-400">
-          <h1>{{ .Title }}</h1>
-        </div>
-
-        {{ .Content }}
-      </section>
+      {{ block "main" . }}
+      {{ end }}
     </div>
-    {{ end }}
   </body>
 </html>
