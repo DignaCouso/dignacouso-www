@@ -1,5 +1,13 @@
 <aside class="sidebar">
   <div class="container sidebar-sticky">
+    <nav>
+      <ul class="sidebar-nav">
+        {{ range .Translations }}
+        <li><a href="{{ .Permalink }}">{{ .Language.LanguageName }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+
     <div class="sidebar-about">
       <a href="{{ .Site.BaseURL }}"><h1>{{ .Site.Title }}</h1></a>
       <p class="lead">
