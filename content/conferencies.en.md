@@ -1,5 +1,6 @@
 ---
 title: "Conferences"
+slug: "conferences"
 menu:
   main:
     weight: 11

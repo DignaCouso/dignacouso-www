@@ -1,17 +1,18 @@
 ---
 title: "Doctoral thesis supervision"
+slug: "doctoral-thesis-supervision"
 menu:
   main:
     weight: 9
 ---
-**Tesis doctorals :**
+**PhD works:**
 
-Simarro, C. (2019). [El paper del tinkering en l'educació stem no
+Simarro, C. (2019). [El paper del tinkering en l\'educació stem no
 formal](http://hdl.handle.net/10803/667284). UAB
 
-Soto, M. (2019).[ Influencia de una propuesta formativa centrada en la
-modelización en la evolución del modelo científico escolar de energía en
-futuros docentes de física y
+Soto, M. (2019).** **[Influencia de una propuesta formativa centrada en
+la modelización en la evolución del modelo científico escolar de energía
+en futuros docentes de física y
 matemática](http://http://hdl.handle.net/10803/667161). UAB
 
 Garrido, A. (2016). [Modelització i models en la formació inicial de
@@ -34,7 +35,7 @@ Roser Pintó)
 
 
 
-**Tesis doctorals en curs:**
+**PhD works in process:**
 
 Solé, C. (en procés, inscrita 2019). *Coneixement conceptual i avaluació
 de recerques sobre la contaminació atmosfèrica en alumnat de
@@ -58,7 +59,7 @@ context multidisciplinar.* UAB (Codirecció:
 
 
 
-**Treballs de Final de Màster de Recerca:**
+**Research Masters:**
 
 Pérez-Pérez, C. (2019), [Canvis en la caracterització de bones
 activitats matemàtiques en un context de desenvolupament professional
@@ -68,10 +69,10 @@ per a mestres de primària ](https://ddd.uab.cat/record/226855?ln=ca)
 Vergara, C. (2018). Ideas del estudiantado para explicar los mecanismos
 de regulación térmica de algunos animales. (Codirecció: Víctor López)
 
-Tena i Gallego, È (2017).** **[Estudi de l'evolució de les creences de
+Tena i Gallego, È (2017).[** **Estudi de l'evolució de les creences de
 l'alumnat en l'últim curs de grau de primària en el disseny d'Unitats
 Didàctiques que promoguin l'Activitat Científica
-Escolar.](https://ddd.uab.cat/record/188354)
+Escolar](https://ddd.uab.cat/record/188354).
 
 Ferrer, D. (2016). [Els recursos educatius sobre l\'energia a Catalunya.
 Anàlisi del grau de competencialitat en l\'enfocament CTS (Ciència,

@@ -1,5 +1,6 @@
 ---
-title: "Material didàctic"
+title: "Teaching materials"
+slug: "teaching-materials"
 menu:
   main:
     weight: 8

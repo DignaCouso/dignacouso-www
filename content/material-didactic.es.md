@@ -1,5 +1,6 @@
 ---
-title: "Material didàctic"
+title: "Material didáctico"
+slug: "material-didactico"
 menu:
   main:
     weight: 8

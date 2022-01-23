@@ -8,13 +8,13 @@ theme = "hyde"
     languageName = "Català"
     description = "Professora agregada, Universitat Autònoma de Barcelona."
     weight = 1
+  [languages.en]
+    languageName = "English"
+    description = "Reader at the Universitat Autònoma de Barcelona."
+    weight = 2
   [languages.es]
     languageName = "Español"
     description = "Profesora agregada, Universitat Autònoma de Barcelona."
-    weight = 2
- [languages.en]
-    languageName = "English"
-    description = "Reader at the Universitat Autònoma de Barcelona."
     weight = 3
 [params]
   twitter = "DignaCouso"
