@@ -1,9 +1,9 @@
 ---
 title: "Dades personals"
 ---
-Professora agregada, Universitat Autònoma de Barcelona. Departament de Didàctica de la Matemàtica i de les Ciències Experimentals.
+Professora agregada, [Universitat Autònoma de Barcelona](https://www.uab.cat/). Departament de Didàctica de la Matemàtica i de les Ciències Experimentals.
 
-Directora del CRECIM - Centre de Recerca per a l'Educació Científica i Matemàtica.
+Directora del CRECIM - [Centre de Recerca per a l'Educació Científica i Matemàtica](https://crecim.cat)
 
 Despatx: Edifici G5, 144. Facultat de Ciències de l'Educació, Campus UAB. 08193, Cerdanyola del Vallès, Barcelona, Catalunya, Espanya.
 
