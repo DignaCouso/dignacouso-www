@@ -4,7 +4,7 @@
     <h1>{{ .Title }}</h1>
     {{ $asset := resources.Get "/portrait.jpg" }}
     {{ $img := $asset.Fit "228x304" }}
-    <img src="{{ $img.RelPermalink }}" />
+    <img src="{{ $img.RelPermalink }}" style="border-radius: 50%;"/>
     {{ .Content }}
   </div>
 </div>
