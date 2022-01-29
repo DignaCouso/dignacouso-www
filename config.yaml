@@ -5,14 +5,17 @@ title: Digna Couso
 theme: hyde
 languages:
   ca:
+    contentDir: "content/ca/"
     languageName: Català
     description: 'Professora agregada, Universitat Autònoma de Barcelona.'
     weight: 1
   en:
+    contentDir: "content/en/"
     languageName: English
     description: Reader at the Universitat Autònoma de Barcelona.
     weight: 2
   es:
+    contentDir: "content/es/"
     languageName: Español
     description: 'Profesora agregada, Universitat Autònoma de Barcelona.'
     weight: 3
