@@ -1,2 +1,1 @@
-[![build](https://github.com/DignaCouso/dignacouso.github.io/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/DignaCouso/dignacouso.github.io/actions/workflows/gh-pages.yml)
-[![deployment](https://github.com/DignaCouso/dignacouso.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/DignaCouso/dignacouso.github.io/actions/workflows/pages/pages-build-deployment)
+
