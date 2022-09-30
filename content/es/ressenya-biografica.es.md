@@ -1,9 +1,10 @@
 ---
-title: "Reseña biográfica"
-slug: "resena-biografica"
+title: Reseña biográfica
+slug: resena-biografica
 menu:
   main:
     weight: 1
+
 ---
 ¡Hola!
 
@@ -29,25 +30,25 @@ y desarrollo profesional de las STEM tanto en primaria como en
 secundaria. Como investigadora, os presento mis líneas de investigación
 principales, sobre las que os invito a leer y participar:
 
--   El desarrollo curricular de las comunidades de practica STEM, dentro
-    de un enfoque competencial.
--   La investigación basada en el diseño de secuencias y materiales de
-    enseñanza y aprendizaje, en particular en entornos participativos y
-    usando progresiones de aprendizaje como herramienta de diseño y
-    validación.
--   La perspectiva de la enseñanza y aprendizaje de indagación centrada
-    en modelizar en ciencias y particularmente en física para los
-    niveles de primaria y secundaria.
--   La formación de profesores, tanto inicial como en ejercicio, desde
-    la perspectiva del desarrollo profesional centrado en el
-    conocimiento práctico del docente y el establecimiento de
-    comunidades de práctica.
+* El desarrollo curricular de las comunidades de practica STEM, dentro
+  de un enfoque competencial.
+* La investigación basada en el diseño de secuencias y materiales de
+  enseñanza y aprendizaje, en particular en entornos participativos y
+  usando progresiones de aprendizaje como herramienta de diseño y
+  validación.
+* La perspectiva de la enseñanza y aprendizaje de indagación centrada
+  en modelizar en ciencias y particularmente en física para los
+  niveles de primaria y secundaria.
+* La formación de profesores, tanto inicial como en ejercicio, desde
+  la perspectiva del desarrollo profesional centrado en el
+  conocimiento práctico del docente y el establecimiento de
+  comunidades de práctica.
 
 Mis últimos intereses de investigación, vinculados a proyectos de tesis
 doctoral, son:
 
--   La equidad y el equilibrio de género en STEM.
--   El análisis del interés, la autoeficacia y las aspiraciones en STEM.
+* La equidad y el equilibrio de género en STEM.
+* El análisis del interés, la autoeficacia y las aspiraciones en STEM.
 
 Mis trabajos de investigación y contribuciones más conocidos se
 encuentran en el campo de la investigación científica, particularmente
@@ -82,5 +83,3 @@ Universidad Católica de Concepción (Chile).
 
 Si hay algo que te interese tanto como a mí, no dudes en navegar por mi
 web y ponerte en contacto conmigo.
-
-Gracias.
