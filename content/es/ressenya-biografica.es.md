@@ -83,3 +83,5 @@ Universidad Católica de Concepción (Chile).
 
 Si hay algo que te interese tanto como a mí, no dudes en navegar por mi
 web y ponerte en contacto conmigo.
+
+Gracias.
