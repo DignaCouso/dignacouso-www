@@ -273,7 +273,7 @@ d\'Innovació, Universitats i Empresa Direcció General de Recerca.
 
 **2005PEIR0050/59:** [Ajuts per a equipaent i infraestructura destinats
 a la recerca (PEIR
-2005)](http://chttp://crecim.cat/projectes/ajuts-per-a-equipament-i-infraestructura-destinats-a-la-recerca-peir-2005/).\
+2005)](http://crecim.cat/projectes/ajuts-per-a-equipament-i-infraestructura-destinats-a-la-recerca-peir-2005/).\
 **Entidad Financiadora:** Generalitat de Catalunya; Departament
 d\'Innovació, Universitats i Empresa Direcció General de Recerca.
 8.798,75€\

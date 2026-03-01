@@ -13,7 +13,7 @@ formal](http://hdl.handle.net/10803/667284). UAB
 Soto, M. (2019).** **[Influencia de una propuesta formativa centrada en
 la modelización en la evolución del modelo científico escolar de energía
 en futuros docentes de física y
-matemática](http://http://hdl.handle.net/10803/667161). UAB
+matemática](http://hdl.handle.net/10803/667161). UAB
 
 Garrido, A. (2016). [Modelització i models en la formació inicial de
 mestres de primària des de la perspectiva de la pràctica

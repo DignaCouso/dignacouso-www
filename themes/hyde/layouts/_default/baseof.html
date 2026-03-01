@@ -1,7 +1,8 @@
 {{ partial "head.html" . }}
   <body class="{{ .Site.Params.themeColor }} {{if .Site.Params.layoutReverse}}layout-reverse{{end}}">
+  <a href="#main-content" class="skip-link">Skip to content</a>
   {{ partial "sidebar.html" . }}
-    <main class="content container">
+    <main id="main-content" class="content container">
     {{ block "main" . -}}{{- end }}
     </main>
   </body>

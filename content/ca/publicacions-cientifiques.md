@@ -117,8 +117,7 @@ de Didáctica de las Matemáticas*, *89*, (pendent numeració)
 
 Solé, C., Tena, È., Couso, D. (2020). [¿Qué modelo de materia explica la
 contaminación? Explorando el modelo corpuscular en la
-mesoescala.](http://file:///C:/Users/Mar/Documents/CRECIM/DIGNA%20CV/per%20despres%20a%20PAPERERA/2020_Sole,%20Tena%20i%20Couso_que-modelo-de-materia-explica-la-contaminacion_Alambique%20101.pdf)
-[](https://www.grao.com/es/producto/revista-alambique-101-julio-20-solidos-liquidos-y-gases-al101)
+mesoescala.](https://www.grao.com/es/producto/revista-alambique-101-julio-20-solidos-liquidos-y-gases-al101)
 *Alambique. Didáctica de las Ciencias Experimentales, 101,* 30-36
 
 López, V., Couso, D., Hernández, M.I. (2020). [Nuevas miradas sobre el
@@ -372,7 +371,7 @@ Barcelona: Publicacions CRECIM.
 
 Couso, D.; López, V. (2019). [L\'ensenyament sobre Energia a Catalunya:
 estat actual, necessitats detectades i reptes de
-futur](http://https://ddd.uab.cat/record/219579). Institut Català de
+futur](https://ddd.uab.cat/record/219579). Institut Català de
 l\'Energia *(ICAEN),* 1-56
 
 Adams, J., Avraamidou, l., Bayram-Jacobs, D., Boujaoude,S., Bryan, L.,

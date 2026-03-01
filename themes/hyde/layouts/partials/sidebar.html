@@ -1,24 +1,25 @@
 <aside class="sidebar">
   <div class="container sidebar-sticky">
-    <nav>
+    <div class="sidebar-about">
+      <h1><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
+      <p class="lead">
+      {{ with .Site.Params.description }} {{.}} {{ else }}{{end}}
+      </p>
+    </div>
+
+    <nav aria-label="Language">
       <ul class="sidebar-nav">
+        <li><span class="current-lang" aria-current="page">{{ .Language.LanguageName }}</span></li>
         {{ range .Translations }}
         <li><a href="{{ .Permalink }}">{{ .Language.LanguageName }}</a></li>
         {{ end }}
       </ul>
     </nav>
 
-    <div class="sidebar-about">
-      <a href="{{ .Site.BaseURL }}"><h1>{{ .Site.Title }}</h1></a>
-      <p class="lead">
-      {{ with .Site.Params.description }} {{.}} {{ else }}{{end}}
-      </p>
-    </div>
-
-    <nav>
+    <nav aria-label="Main">
       <ul class="sidebar-nav">
         {{ range .Site.Menus.main -}}
-        <li><a href="{{.URL}}"> {{ .Name }} </a></li>
+        <li><a href="{{.URL}}" class="sidebar-nav-item{{ if eq .URL $.RelPermalink }} active{{ end }}"> {{ .Name }} </a></li>
         {{- end }}
       </ul>
       <ul class="sidebar-nav">

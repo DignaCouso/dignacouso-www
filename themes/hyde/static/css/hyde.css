@@ -26,6 +26,25 @@
 
 
 /*
+ * Skip link
+ */
+
+.skip-link {
+  position: absolute;
+  top: -3rem;
+  left: 0;
+  background: #fff;
+  color: #202020;
+  padding: 0.5rem 1rem;
+  z-index: 100;
+  font-weight: bold;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+
+/*
  * Global resets
  *
  * Update the foundational and global aspects of the page.
@@ -56,7 +75,7 @@ html {
 .sidebar {
   text-align: center;
   padding: 2rem 1rem;
-  color: rgba(255,255,255,.5);
+  color: rgba(255,255,255,.75);
   background-color: #202020;
 }
 @media (min-width: 48em) {
@@ -98,7 +117,10 @@ a.sidebar-nav-item:focus {
 .sidebar-nav-item.active {
   font-weight: bold;
 }
-
+.sidebar-nav .current-lang {
+  color: #fff;
+  font-weight: bold;
+}
 /* Sticky sidebar
  *
  * Add the `sidebar-sticky` class to the sidebar's container to affix it the

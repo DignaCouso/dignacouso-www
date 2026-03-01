@@ -15,7 +15,7 @@ Childhood Educators Handbook of Research on STEM Education* (pp. 22-25)
 
 Couso, D., Simarro, C. (2020). [STEM Education Through the
 Epistemological Lens: Unveiling the Challenge of STEM
-Transdisciplinarity.](http://T'envio%20l'%C3%BAltim%20cap%C3%ADtol%20de%20llibre%20que%20ha%20sortit%20publicat%20amb%20la%20Cristina%20Simarro%20aquesta%20setmana%20per%20a%20que%20el%20puguis%20afegir:%20https//books.google.es/books?id=AjXfDwAAQBAJ&printsec=frontcover&hl=es#v=onepage&q&f=false) In Carla
+Transdisciplinarity.](https://books.google.es/books?id=AjXfDwAAQBAJ&printsec=frontcover&hl=es#v=onepage&q&f=false) In Carla
 C. Johnson, Margaret J. Mohr-Schroeder, Tamara J. Moore, Lyn D English
 (Eds.), *Handbook of Research on STEM Education. *New York: Routledge.
 
