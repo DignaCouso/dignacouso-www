@@ -11,6 +11,25 @@ Replace manual Hugo markdown editing with a Google Sheets-based content manageme
 - **Constraint:** She works from one Windows computer with no technical tools installed (no Git, Python, etc.). She needs full autonomy — no technical help required to publish
 - **Content update pattern:** All data available at once when adding entries; updates all content types
 
+## Prerequisites
+
+### Hugo version upgrade
+
+Content adapters require Hugo >= 0.126.0. The current installed version is 0.123.7. Must upgrade both locally and on Netlify.
+
+### Netlify configuration
+
+Create `netlify.toml` to pin the Hugo version and build settings:
+
+```toml
+[build]
+  command = "hugo"
+  publish = "public"
+
+[build.environment]
+  HUGO_VERSION = "0.145.0"
+```
+
 ## Content Types
 
 ### Managed by Google Sheets (frequently updated)
@@ -35,7 +54,7 @@ Replace manual Hugo markdown editing with a Google Sheets-based content manageme
 
 ## Data Structure
 
-All data is language-independent. Translations of section headings and field labels are handled in Hugo content adapter templates.
+All data is language-independent. Translations of section headings and field labels are handled in Hugo content adapter templates. Entries are stored sorted by year descending in the JSON files.
 
 ### publications.json
 
@@ -188,54 +207,102 @@ Types: `phd`, `master`, `tfg`. Status: `completed`, `in-progress`
 
 ## Hugo Content Adapters
 
-Each content type gets a `_content.gotmpl` file that reads its JSON and generates trilingual pages.
+### Language directory compatibility
+
+The site uses per-language `contentDir` configuration (`content/ca/`, `content/en/`, `content/es/`). Content adapters must be placed inside each language directory. Each adapter is identical — it detects its language from `.Site.Language.Lang` and renders accordingly.
+
+### URL preservation
+
+Adapter directories use the current Catalan slug names to preserve existing URLs. This ensures no external links break.
+
+| Content Type | Directory Name |
+|---|---|
+| Publications | `publicacions-cientifiques/` |
+| Research Projects | `projectes-de-recerca/` |
+| Books and Chapters | `llibres-i-capitols/` |
+| Conference Contributions | `aportacions-a-congressos/` |
+| Invited Talks | `conferencies/` |
+| Contracts and Agreements | `contractes-i-convenis/` |
+| Thesis Supervision | `direccio-de-treballs/` |
+| Teaching Materials | `material-didactic/` |
 
 ### File structure
 
+Each content type has a `_content.gotmpl` in each language directory, plus an `_index.md` for menu configuration. The adapters are identical copies — they detect the active language at build time.
+
 ```
 content/
-├── publications/
-│   ├── _content.gotmpl
-│   └── _index.md
-├── projects/
-│   ├── _content.gotmpl
-│   └── _index.md
-├── books/
-│   ├── _content.gotmpl
-│   └── _index.md
-├── conferences/
-│   ├── _content.gotmpl
-│   └── _index.md
-├── talks/
-│   ├── _content.gotmpl
-│   └── _index.md
-├── contracts/
-│   ├── _content.gotmpl
-│   └── _index.md
-├── theses/
-│   ├── _content.gotmpl
-│   └── _index.md
-└── materials/
-    ├── _content.gotmpl
-    └── _index.md
+├── ca/
+│   ├── publicacions-cientifiques/
+│   │   ├── _content.gotmpl
+│   │   └── _index.md          (menu: main, weight, title)
+│   ├── projectes-de-recerca/
+│   │   ├── _content.gotmpl
+│   │   └── _index.md
+│   ├── ... (other content types)
+│   ├── ressenya-biografica.md  (static, manually edited)
+│   ├── formacio.md             (static)
+│   └── reconeixements.md       (static)
+├── en/
+│   ├── publicacions-cientifiques/
+│   │   ├── _content.gotmpl
+│   │   └── _index.md
+│   ├── projectes-de-recerca/
+│   │   ├── _content.gotmpl
+│   │   └── _index.md
+│   └── ... (same structure)
+├── es/
+│   ├── publicacions-cientifiques/
+│   │   ├── _content.gotmpl
+│   │   └── _index.md
+│   ├── projectes-de-recerca/
+│   │   ├── _content.gotmpl
+│   │   └── _index.md
+│   └── ... (same structure)
+data/
+├── publications.json
+├── projects.json
+├── books.json
+├── conferences.json
+├── talks.json
+├── contracts.json
+├── theses.json
+└── materials.json
 ```
+
+### _index.md files
+
+Each `_index.md` provides the section title and menu entry for its content type. Example for Catalan publications:
+
+```yaml
+---
+title: "Publicacions Científiques"
+menu:
+  main:
+    weight: 4
+---
+```
+
+The English version would have `title: "Scientific Publications"`, etc. These are small static files that don't change.
 
 ### Adapter pattern
 
 Each adapter follows this structure:
 
-1. Call `EnableAllLanguages` to generate pages for ca/es/en from a single template
-2. Read data from `site.Data` (the JSON files)
-3. Use translation dicts for section headings and field labels
+1. Read data from `.Site.Data` (the JSON files in `data/`)
+2. Detect language from `.Site.Language.Lang`
+3. Look up translated section headings and field labels from translation dicts
 4. Group entries by type/section
-5. Generate markdown content string
-6. Call `AddPage` with the content and translated title
+5. Generate markdown content string with proper formatting
+6. Call `.AddPage` with the content
 
 ### Translation approach
 
 All translations are defined in the adapter templates as Go template dicts. Example:
 
 ```go-html-template
+{{ $lang := .Site.Language.Lang }}
+
 {{ $headings := dict
   "indexed-jcr" (dict
     "ca" "Articles en revistes indexades (JCR, SJR, SCOPUS)"
@@ -243,9 +310,19 @@ All translations are defined in the adapter templates as Go template dicts. Exam
     "en" "Publications on journals with impact factor (JCR, SJR, SCOPUS)"
   )
 }}
+
+{{ $labels := dict
+  "funding" (dict "ca" "Entitat Finançadora" "es" "Entidad Financiadora" "en" "Funding Entity")
+  "duration" (dict "ca" "Durada" "es" "Duración" "en" "Duration")
+  "pi" (dict "ca" "IP" "es" "IP" "en" "PI")
+}}
 ```
 
 Field labels (e.g., "Funding Entity" / "Entitat Finançadora" / "Entidad Financiadora") follow the same pattern.
+
+### Zotero RIS link
+
+The existing Zotero RIS download link on the publications page and homepage is preserved. The publications adapter includes it as a static link in the generated content. The RIS file generation script (`scripts/generate_ris.py`) is updated to read from `data/publications.json` instead of parsing markdown.
 
 ## Publish Pipeline
 
@@ -256,8 +333,10 @@ Field labels (e.g., "Funding Entity" / "Entitat Finançadora" / "Entidad Financi
 3. **GitHub Action** (`/.github/workflows/publish.yml`):
    - Authenticates with Google Sheets API via service account
    - Reads all tabs
+   - Validates data (required fields present, valid types, no empty rows)
    - Converts each tab to its JSON file in `data/`
-   - Commits only if files changed
+   - Runs `hugo build` to verify the site builds successfully
+   - Commits only if files changed and build succeeds
    - Push triggers Netlify
 4. **Netlify** builds Hugo — content adapters generate pages from JSON
 5. **Site live** ~2 minutes after button click
@@ -267,14 +346,44 @@ Field labels (e.g., "Funding Entity" / "Entitat Finançadora" / "Entidad Financi
 - Primary: `repository_dispatch` event from sheet button
 - Backup: `workflow_dispatch` for manual trigger from GitHub
 
+### Data validation
+
+Before committing, the GitHub Action validates:
+- Required fields are present (e.g., year, authors, title for publications)
+- Type/section values match allowed enums
+- Empty rows and whitespace-only cells are stripped
+- JSON is well-formed
+
+If validation fails, the action exits with an error and no commit is made.
+
 ### Error handling
 
-- If the GitHub Action fails, no commit happens, site stays as-is
-- Optional email notification on failure via GitHub Actions
+- If the GitHub Action fails (API error, validation error, build failure), no commit happens, site stays as-is
+- GitHub Actions sends email notification on failure (enabled by default for repo owners)
+
+### Google Sheets API authentication
+
+- Create a Google Cloud project with Sheets API enabled
+- Create a service account and download its JSON key
+- Share the Google Sheet with the service account email (read-only access)
+- Store the service account JSON key as a GitHub Actions secret (`GOOGLE_SHEETS_KEY`)
+- Store the Sheet ID as a secret (`GOOGLE_SHEET_ID`)
 
 ### Google Apps Script (in the sheet)
 
-A simple script attached to a "Publish" button that sends a POST request to the GitHub Actions API with a personal access token stored as a script property.
+A simple script attached to a "Publish" button that sends a POST request to the GitHub Actions API. The GitHub personal access token is stored as a Google Apps Script property (not visible in the sheet).
+
+```javascript
+function publish() {
+  var token = PropertiesService.getScriptProperties().getProperty('GITHUB_TOKEN');
+  UrlFetchApp.fetch('https://api.github.com/repos/OWNER/REPO/dispatches', {
+    method: 'post',
+    headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' },
+    payload: JSON.stringify({ event_type: 'publish' })
+  });
+  SpreadsheetApp.getUi().alert('Publishing! The site will update in ~2 minutes.');
+}
+```
 
 ## Google Sheet Structure
 
@@ -282,17 +391,28 @@ One Google Sheet with one tab per content type. Column headers match the JSON fi
 
 Tabs: Publications, Projects, Books, Conferences, Talks, Contracts, Theses, Materials
 
+The sheet is pre-populated during migration with all existing data. Column headers include a frozen header row with field names and optional helper text (via cell notes) explaining what each column expects.
+
+### Defensive measures
+
+- Header row is frozen and protected (cannot be accidentally deleted)
+- Columns are in a fixed order; the conversion script reads by column name, not position
+- Data validation rules on type/section columns (dropdown lists of allowed values)
+- Conditional formatting to highlight rows with missing required fields
+
 ## Initial Migration
 
 ### Steps
 
-1. **Parse existing markdown** — one-time Python script extracts all entries from current Hugo content files into the JSON structure
-2. **Write JSON files** to `data/`
-3. **Build content adapters** — create `_content.gotmpl` files for each content type
-4. **Verify** — run `hugo server` and compare output against current site. Content should be equivalent with cleaner/more consistent formatting
-5. **Remove old markdown files** — delete the hand-written markdown for the 8 migrated content types
-6. **Populate Google Sheet** — generate CSVs from JSON for import into Google Sheets. From this point, the sheet is the source of truth
-7. **Wire up pipeline** — set up GitHub Action and Google Apps Script publish button
+1. **Upgrade Hugo** — upgrade to >= 0.126.0 locally; create `netlify.toml` pinning the version for production
+2. **Parse existing markdown** — one-time Python script extracts all entries from current Hugo content files into the JSON structure
+3. **Write JSON files** to `data/`
+4. **Build content adapters** — create `_content.gotmpl` and `_index.md` files for each content type in each language directory
+5. **Verify** — run `hugo server` and compare output against current site. Content should be equivalent with cleaner/more consistent formatting
+6. **Remove old markdown files** — delete the hand-written markdown for the 8 migrated content types
+7. **Populate Google Sheet** — generate CSVs from JSON for import into Google Sheets. From this point, the sheet is the source of truth
+8. **Wire up pipeline** — set up Google Cloud service account, GitHub Action, GitHub secrets, and Google Apps Script publish button
+9. **Update RIS script** — modify `scripts/generate_ris.py` to read from `data/publications.json`
 
 ### Migration order
 
