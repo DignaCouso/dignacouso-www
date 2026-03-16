@@ -228,36 +228,30 @@ Adapter directories use the current Catalan slug names as directory names. Engli
 
 ### File structure
 
-Each content type has a `_content.gotmpl` in each language directory, plus an `_index.md` for menu configuration. The adapters are identical copies — they detect the active language at build time.
+Each content type has a `_content.gotmpl` in each language directory. No `_index.md` files are needed — the adapter generates the full section page via `.AddPage` with `kind: "section"`, including title, slug, menu, and body content. The adapters are identical copies — they detect the active language at build time.
 
 ```
 content/
 ├── ca/
 │   ├── publicacions-cientifiques/
-│   │   ├── _content.gotmpl
-│   │   └── _index.md          (menu: main, weight, title)
+│   │   └── _content.gotmpl
 │   ├── projectes-de-recerca/
-│   │   ├── _content.gotmpl
-│   │   └── _index.md
-│   ├── ... (other content types)
+│   │   └── _content.gotmpl
+│   ├── ... (other content types, same pattern)
 │   ├── ressenya-biografica.md  (static, manually edited)
 │   ├── formacio.md             (static)
 │   └── reconeixements.md       (static)
 ├── en/
 │   ├── publicacions-cientifiques/
-│   │   ├── _content.gotmpl
-│   │   └── _index.md
+│   │   └── _content.gotmpl
 │   ├── projectes-de-recerca/
-│   │   ├── _content.gotmpl
-│   │   └── _index.md
+│   │   └── _content.gotmpl
 │   └── ... (same structure)
 ├── es/
 │   ├── publicacions-cientifiques/
-│   │   ├── _content.gotmpl
-│   │   └── _index.md
+│   │   └── _content.gotmpl
 │   ├── projectes-de-recerca/
-│   │   ├── _content.gotmpl
-│   │   └── _index.md
+│   │   └── _content.gotmpl
 │   └── ... (same structure)
 data/
 ├── publications.json
@@ -270,58 +264,52 @@ data/
 └── materials.json
 ```
 
-### _index.md files
+### Menu weights
 
-Each `_index.md` provides the section title, menu entry, and (for EN/ES) the translated slug. Examples for publications:
+The adapter sets the menu weight for each content type to match the current site:
 
-Catalan (`content/ca/publicacions-cientifiques/_index.md`):
-```yaml
----
-title: "Publicacions Científiques"
-menu:
-  main:
-    weight: 4
----
-```
-
-English (`content/en/publicacions-cientifiques/_index.md`):
-```yaml
----
-title: "Scientific Publications"
-slug: "scientific-publications"
-menu:
-  main:
-    weight: 4
----
-```
-
-Spanish (`content/es/publicacions-cientifiques/_index.md`):
-```yaml
----
-title: "Publicaciones Científicas"
-slug: "publicaciones-cientificas"
-menu:
-  main:
-    weight: 4
----
-```
-
-These are small static files that don't change.
-
-### Adapter and _index.md interaction
-
-The current site renders each content type as a single long list page (not individual sub-pages). The content adapter generates this list page content by calling `.AddPage` with the section's path. The `_index.md` file provides front matter (title, slug, menu) for the section. The adapter's `.AddPage` generates the page content that appears below the title.
+| Weight | Content Type | Managed by |
+|---|---|---|
+| 1 | Biography | static (manual) |
+| 2 | Research Projects | adapter |
+| 3 | Contracts and Agreements | adapter |
+| 4 | Publications | adapter |
+| 5 | Books and Chapters | adapter |
+| 6 | Conference Contributions | adapter |
+| 7 | Training/Education | static (manual) |
+| 8 | Teaching Materials | adapter |
+| 9 | Thesis Supervision | adapter |
+| 10 | Acknowledgments | static (manual) |
+| 11 | Invited Talks | adapter |
 
 ### Adapter pattern
+
+Each adapter generates a full section page (no `_index.md` needed) by calling `.AddPage` with `kind: "section"`. This includes title, slug, menu configuration, and the rendered body content.
 
 Each adapter follows this structure:
 
 1. Read data from `.Site.Data` (the JSON files in `data/`)
 2. Detect language from `.Site.Language.Lang`
-3. Look up translated section headings and field labels from translation dicts
+3. Look up the translated title, slug, section headings, and field labels from translation dicts
 4. Group entries by type/section
 5. Generate markdown content string with proper formatting
-6. Call `.AddPage` with the content and the section path
+6. Call `.AddPage` with `kind: "section"`, `title`, `path`, `params` (including `slug` and `menu`), and `content`
+
+Example `.AddPage` call:
+
+```go-html-template
+{{ $page := dict
+  "content" (dict "mediaType" "text/markdown" "value" $content)
+  "kind" "section"
+  "path" "publicacions-cientifiques"
+  "title" (index $titles $lang)
+  "params" (dict
+    "slug" (index $slugs $lang)
+    "menu" (dict "main" (dict "weight" 4))
+  )
+}}
+{{ $.AddPage $page }}
+```
 
 ### Translation approach
 
