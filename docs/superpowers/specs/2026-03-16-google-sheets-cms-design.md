@@ -228,7 +228,7 @@ Adapter directories use the current Catalan slug names as directory names. Engli
 
 ### File structure
 
-Each content type has a `_content.gotmpl` in each language directory. No `_index.md` files are needed — the adapter generates the full section page via `.AddPage` with `kind: "section"`, including title, slug, menu, and body content. The adapters are identical copies — they detect the active language at build time.
+Each content type has a `_content.gotmpl` in each language directory. No `_index.md` files are needed — the adapter generates a regular page via `.AddPage`, including title, slug, menus, and body content. The adapters are identical copies — they detect the active language at build time.
 
 ```
 content/
