@@ -183,14 +183,14 @@ Genomics (CRAG)**\
 *Autores:* **Couso, D.**\
 *Título*: **[Què vol dir aprendre ciències?. Ponència sobre indagació,
 modelització i argumentació per a mestres de
-primària](http://crecim.cat/que-vol-dir-aprendre-ciencies-digna-couso-fa-una-ponencia-sobre-indagacio-modelitzacio-i-argumentacio-per-a-mestres-de-primaria/).**\
+primària](https://www.crecim.cat/ca/projecte/que-vol-dir-aprendre-ciencies-digna-couso-fa-una-ponencia-sobre-indagacio-modelitzacio-i-argumentacio-per-a-mestres-de-primaria).**\
 *Institución organizadora*: **ICE UAB**\
 *Lugar de celebración*: **Campus de la UAB, Barcelona (España)**\
 *Fecha*: febrero de 2018
 
 *Autores:* **Couso, D.**\
 *Título*: **[Citas con Ciencia. El despertar de la vocación
-científica.](http://crecim.cat/digna-couso-participara-en-el-debate-citas-con-ciencia-sobre-vocaciones-cientificas-de-la-fundacion-lilly/)**\
+científica.](https://www.crecim.cat/ca/projecte/digna-couso-participara-en-el-debate-citas-con-ciencia-sobre-vocaciones-cientificas-de-la-fundacion-lilly)**\
 *Institución organizadora*: **Fundació Lilly**\
 *Lugar de celebración*: **Academia de las Artes y las Ciencias
 Cinematográficas, Madrid (España)**\

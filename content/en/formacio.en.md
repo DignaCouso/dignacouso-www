@@ -181,14 +181,14 @@ properly open our science?**\"\
 *Authors:* **Couso, D.**\
 *Title*: **[Què vol dir aprendre ciències?. Ponència sobre indagació,
 modelització i argumentació per a mestres de
-primària](http://crecim.cat/que-vol-dir-aprendre-ciencies-digna-couso-fa-una-ponencia-sobre-indagacio-modelitzacio-i-argumentacio-per-a-mestres-de-primaria/).**\
+primària](https://www.crecim.cat/ca/projecte/que-vol-dir-aprendre-ciencies-digna-couso-fa-una-ponencia-sobre-indagacio-modelitzacio-i-argumentacio-per-a-mestres-de-primaria).**\
 *Organizing institution*: **ICE UAB**\
 *Place of celebration*: **Campus de la UAB, Barcelona (Spain)**\
 *Date*: 02/2018
 
 *Authors:* **Couso, D.**\
 *Title*: **[Citas con Ciencia. El despertar de la vocación
-científica.](http://crecim.cat/digna-couso-participara-en-el-debate-citas-con-ciencia-sobre-vocaciones-cientificas-de-la-fundacion-lilly/)**\
+científica.](https://www.crecim.cat/ca/projecte/digna-couso-participara-en-el-debate-citas-con-ciencia-sobre-vocaciones-cientificas-de-la-fundacion-lilly)**\
 *Organizing institution*: **Fundació Lilly**\
 *Place of celebration*: **Academia de las Artes y las Ciencias
 Cinematográficas, Madrid (Spain)**\

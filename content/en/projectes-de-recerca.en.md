@@ -19,7 +19,7 @@ Performances, Goals and CriticAl thinking)\
 **Duration** 01/01/2019 - 31/12/2021\
 **IP:** Digna Couso i Conxita Màrquez
 
-**2018-1-TR01-KA203-059568:** [PARENSTEM](https://crecim.cat/parentstem/)\
+**2018-1-TR01-KA203-059568:** [PARENSTEM](https://www.crecim.cat/ca/projecte/parentstem-stem-for-pre-schoolers-and-their-families)\
 **Funding Entity:** European Commission\
 **Participating Entities:** Kırıkkale University / TURKEY; The
 Martin-Luther-University Halle-Wittenberg / GERMANY,\
@@ -34,7 +34,7 @@ Cerdanyola del Vallès / SPAIN\
 
 **2017ACUP 00274:** [Ciència ciutadana per analitzar l'efecte de la
 contaminació en la funció cognitiva dels adolescents
-(ATENC!Ó)](http://crecim.cat/4335-2/)\
+(ATENC!Ó)](https://www.crecim.cat/ca/projecte/ciencia-ciutadana-per-analitzar-lefecte-de-la-contaminacio-en-la-funcio-cognitiva-dels-adolescents-atenco)\
 **Funding Entity:** RecerCaixa, ACUP, Obra Social La Caixa. /
 85.732,88€\
 **Participating Entities:** CRECIM i ISGlobal (Institut de Salut
@@ -43,7 +43,7 @@ Global)\
 
 **FCT-17-11955:** [Participación Científica Escolar para la Calidad del
 AIRE
-(ParticipAIRE)](http://crecim.cat/participacion-cientifica-escolar-para-la-calidad-del-aire-participaire/)\
+(ParticipAIRE)](https://www.crecim.cat/ca/projecte/participacion-cientifica-escolar-para-la-calidad-del-aire-participaire)\
 **Funding Entity:** FECYT\
 **Participating Entities:** CRECIM i ISGlobal (Institut de Salut
 Global)\
@@ -51,7 +51,7 @@ Global)\
 
 **SwafS-04-2016 741527:** [Open Responsible research and Innovation to
 further Outstanding Knowledge
-(ORION)](http://crecim.cat/open-responsible-research-and-innovation-to-further-outstanding-knowledge-orion/)\
+(ORION)](https://www.crecim.cat/ca/projecte/open-responsible-research-and-innovation-to-further-outstanding-knowledge-orion)\
 **Funding Entity:** European Commission/ 221.942,94€\
 **Participating Entities:** Universitat Autònoma de Barcelona (Spain),
 Centre de Regulació Genòmica (Spain), Masaryk University (Ceska
@@ -66,16 +66,16 @@ ANT Foundation (Italy); South Moravian Centre for International Mobility
 Innovación Responsable del impacto de las colaboraciones
 alumnado-personal investigador en actividades de educación y
 comunicación
-científica](http://crecim.cat/evaluacion-desde-un-marco-de-investigacion-e-innovacion-responsable-del-impacto-de-las-colaboraciones-alumnado-personal-investigador-en-actividades-de-educacion-y-comunicacion-cientifica/)\
+científica](https://www.crecim.cat/ca/projecte/evaluacion-desde-un-marco-de-investigacion-e-innovacion-responsable-del-impacto-de-las-colaboraciones-alumnado-personal-investigador-en-actividades-de-educaicon-y-comunicacion-cientifica)\
 **Funding Entity:** FECYT. 22.000€\
 **Participating Entities:** CRECIM-UAB, Fundación Elhuyar\
 **Duration:** Gener 2017 - Desembre 2017
 
 **2016-1-ES01-KA201-025633:**
-[](http://crecim.cat/projectes/cooperation-for-innovation-and-the-exchange-of-good-practices-steam4u/)
+
 [Raising students' perceived self-efficacy in steam to provide
 opportunities for all
-(STEAM4U)](http://crecim.cat/projectes/cooperation-for-innovation-and-the-exchange-of-good-practices-steam4u/).\
+(STEAM4U)](https://www.crecim.cat/ca/projecte/raising-students-perceived-self-efficacy-in-steam-to-provide-opportunities-for-all-steam4u).\
 **Funding Entity:** European Commission; Erasmus+ (KA2, Cooperation for
 Innovation and the Exchange of Good Practices. Strategic Partnerships
 for school education). 170.940€\
@@ -89,7 +89,7 @@ Dzieci (Poland), Xkè? Zerotredici (Italy), The festival of Curiosity
 ciencias de secundaria: Análisis de dificultades, propuestas de
 formación y elaboración de materiales didácticos como \"buenas
 prácticas\" en el ámbito
-(COMPEC)](http://crecim.cat/projectes/compec/).\
+(COMPEC)](https://www.crecim.cat/ca/projecte/la-competencia-cientifica-en-el-professorado-de-ciencias-de-secundaria-analisis-de-dificultades-propuestas-de-formacion-y-elaboracion-de-materiales-didacticos-como-buenas-practicas-en-el-ambito-compec).\
 **Funding Entity:** Ministerio de Ciencia e Innovación. Investigación
 fundamental no orientada dentro del Plan Nacional de I+D+I (2008-2011).
 30.008€\
@@ -101,7 +101,7 @@ fundamental no orientada dentro del Plan Nacional de I+D+I (2008-2011).
 [**IP Nacional:**]{.underline}
 
 **527602-LLP-1-2012-1-CY-COMENIUS-CMP: **[Preparing Science Educators
-for Everyday Science (PreSEES)](http://crecim.cat/projectes/presees/).\
+for Everyday Science (PreSEES)](https://www.crecim.cat/ca/projecte/preparing-science-educators-for-everyday-science-presees).\
 **Funding Entity:** European Commission.Education & Culture DG. Lifelong
 Learning Programme.Key Activity 4. Multilateral Projects.317.076€
 (29.056€ UAB)\
@@ -113,7 +113,7 @@ din Piesti (RO), King\'s College (GB)\
 
 **FP7-SCIENCE-IN-SOCIETY-2009-1-24489:**[ Transformative Research
 Activities -- Cultural Diversities and Education
-in Science (TRACES).](http://crecim.cat/projectes/traces/)\
+in Science (TRACES).](https://www.crecim.cat/ca/projecte/transformative-research-activities-cultural-diversities-and-education-in-science-traces)\
 **Funding Entity:** European Commission. 7th FP DG Research. Programa:
 Science and Society. 996.800€ (179.600€ UAB)\
 **Participating Entities:** Università degli Studi di Napoli Federico II
@@ -126,7 +126,7 @@ de Salta (AR)\
 
 **128749-CP-1-2006-1-IE-COMENIUS-C21: **[Gender, Innovation and
 Mentoring in Mathematics and Science
-(GIMMS)](http://crecim.cat/projectes/gimms/).\
+(GIMMS)](https://www.crecim.cat/ca/projecte/gender-innovation-and-mentoring-in-mathematics-and-science-gimms).\
 **Funding Entity:** European Commission. DG Education and Culture.
 288.416€ (18.000€ UAB)\
 **Participating Entities:** University of Limerick (IE), IPN- University
@@ -140,7 +140,7 @@ CRECIM- Univerisitat Autònoma de Barcelona (ES)\
 [**Other PI:**]{.underline}
 
 **FCT-16-10825:** [Proyecto \"Plantas
-Mutantes\"](http://crecim.cat/plantas-mutantes/)\
+Mutantes\"](https://www.crecim.cat/ca/projecte/plantas-mutantes)\
 **Funding Entity:** FECYT\
 **Participating Entities:** CRECIM-UAB i Centre de Recerca en
 Agrigenòmica (CRAG)\
@@ -160,7 +160,7 @@ Universitat de Santiago de Compostela.\
 
 **ARMIF 0031:** [El pensament computacional en la formació inicial de
 mestres
-(PECOFIM)](http://crecim.cat/projectes/pecofim-el-pensament-computacional-en-la-formacio-inicial-de-mestres/).\
+(PECOFIM)](https://www.crecim.cat/ca/projecte/el-pensament-computacional-en-la-formacio-inicial-de-mestres-pecofim).\
 **Funding Entity:** Agència de Gestió d'Ajuts Universitaris i de Recerca
 (AGAUR). 9.750€\
 **Participating Entities:** Univeristat Autònoma de Barcelona i
@@ -171,7 +171,7 @@ Universitat de Girona\
 **FCT-14-8903:** [Evaluación del impacto de las actividades de
 divulgación y comunicación científica del Parc Científic de Barcelona
 dentro del programa "Investigación en
-Sociedad](http://crecim.cat/projectes/avaluacio-investigacion-en-sociedad/)".\
+Sociedad](https://www.crecim.cat/ca/projecte/evaluacion-del-impacto-de-las-activitades-de-divulgacion-y-comunicacion-cientifica-del-parc-cientific-de-barcelona-dentro-del-programa-investigacion-en-sociedad)".\
 **Funding Entity:** Fundación española para la Ciencia y la Tecnología
 (FECYT). 22.200€\
 **Participating Entities:** Universitat Autònoma de Barcelona i Parc
@@ -180,7 +180,7 @@ Científic de Barcelona (PCB)\
 **IP:** Roser Pintó Casulleras
 
 **EDU2011-1487-E:** [Computer Based Learning in Science (CBLIS)
-2012](http://crecim.cat/projectes/computer-based-learning-in-science-cblis-2012/).
+2012](https://www.crecim.cat/ca/projecte/computer-based-learning-in-science-cblis).
  \
 **Funding Entity:** Ministerio de ecnomía y competitividad (MINECO).
 5.000€\
@@ -195,7 +195,7 @@ CRECIM- Universitat Autònoma de Barcelona (SPA)\
 
 **2011ACUP00260: **[La utilització de l'aula digital a les clases de
 Ciències: anàlisi de l'estat actual i identificació de bones practiques
-(ADIGIC)](http://crecim.cat/projectes/adigic/). \
+(ADIGIC)](https://www.crecim.cat/ca/projecte/la-utilitzacio-de-laula-digital-a-les-classes-de-ciencies-analisi-de-lestat-actual-i-identificacio-de-bones-practiques-adigic). \
 **Funding Entity:** L'Obra Social de La Caixa (RecerCaixa). 71.481,23€\
 **Participating Entities: ** CRECIM- Uniersitat Autònoma de Barcelona\
 **Duration:** Novembre 2011 - Desembre 2013.\
@@ -203,15 +203,15 @@ Ciències: anàlisi de l'estat actual i identificació de bones practiques
 
 **EDU2009-06525-E/EDUC:** [Roadmap para la enseñanza de las ciencias con
 TIC en aulas hospitalarias.
-](http://crecim.cat/projectes/roadmap-tic-aula-hospitalaria/)\
+](https://www.crecim.cat/ca/projecte/roadmap-para-la-ensenanza-de-las-ciencias-con-tic-en-aulas-hospitalarias-roadmap-tic-aula-hospitalaria)\
 **Funding Entity:** Ministerio de Ciencia e Innovación. 15.200€\
 **Duration:** Gener 2010 - Desembre 2010.\
 **IP:** Roser Pintó Casulleras.
 
 **FCT-10-524:** [Clases-Visita de tecnología. Fase de desarrollo del
 Proyecto Prat de la
-Riba](http://crecim.cat/projectes/clases-visita-de-tecnologia-fase-de-desarrollo-del-proyecto-prat-de-la-riba/)
-[](http://crecim.cat/projectes/roadmap-tic-aula-hospitalaria/)\
+Riba](https://www.crecim.cat/ca/projecte/clases-visita-de-tecnologia-fase-de-desarrollo-del-proyecto-prat-de-la-riba)
+\
 **Funding Entity:** Fundación Española para la Ciencia y la Tecnología
 (FECYT). 20.000€\
 **Duration:** Gener 2010 - Juny 2010.\
@@ -219,15 +219,15 @@ Riba](http://crecim.cat/projectes/clases-visita-de-tecnologia-fase-de-desarrollo
 
 **ACI2008-0760:** [Potenciación internacional investigación española en
 formación científica en aulas
-hospitalarias.](http://crecim.cat/es/projectes/piefcalhos/)
-[](http://crecim.cat/projectes/roadmap-tic-aula-hospitalaria/)\
+hospitalarias.](https://www.crecim.cat/ca/projecte/potenciacion-internacional-de-la-investigacion-espanola-en-formacion-cientifica-en-aulas-hospitalarias-piefcalhos)
+\
 **Funding Entity:** Ministerio de Ciencia e Innovación. 10.000€\
 **Duration:** Setembre 2009 - Setembre 2010.\
 **IP:** Roser Pintó Casulleras.
 
 **2007/ARIE700057:** [Impacte del Software de Modelització en el
 professorat de Ciències de Secundaria
-(ISMOP)](http://crecim.cat/projectes/ismop/). \
+(ISMOP)](https://www.crecim.cat/ca/projecte/impacte-del-software-de-modelitzacio-en-el-professorat-de-ciencies-a-secundaria-ismop). \
 **Funding Entity:** Direcció General de Recerca de la Generalitat de
 Catalunya.\
 **Participating Entities:** CRECIM- Universitat Autònoma de Barcelona\
@@ -237,7 +237,7 @@ Catalunya.\
 **S&S-16-042942: ** \"[University-School Partnerships for the design and
 implementation of research-based ICT-enhanced modules on Materials
 Properties (Materials
-Science)](http://crecim.cat/projectes/materials-science/)\" \
+Science)](https://www.crecim.cat/ca/projecte/university-school-partnerships-for-the-desing-and-implementation-of-research-based-ict-enhanced-modules-on-material-properties-materials-science)\" \
 **Funding Entity:** European Commission. DG Research. 6th Framework.
 Programa: Science and Society. 652.000€ (100.000€ UAB)\
 **Participating Entities:** University od Cyprus (CY), Aristotelian
@@ -248,7 +248,7 @@ Federico II (IT), University of Western Macedonia (GR).\
 **IP:** Costas Constantinou.
 
 **SEJ2007-68113-C02-01/EDUC:** [Aprendizaje de la Física a través de
-Internet (AFINET)](http://crecim.cat/projectes/afinet/).\
+Internet (AFINET)](https://www.crecim.cat/ca/projecte/aprendizaje-de-la-fisica-a-traves-de-internet-afinet).\
 **Funding Entity:** Ministerio de Educación y Ciencia. 44.165€\
 **Participating Entities:** CRECIM- Universitat Autònoma de Barcelona
 (ES), Universitat Politècnica de Catalunya (UPC) (ES)\
@@ -257,7 +257,7 @@ Internet (AFINET)](http://crecim.cat/projectes/afinet/).\
 
 **2006PEIR100001/60:** [Ajuts per a equipaent i infraestructura
 destinats a la recerca (PEIR
-2006)](http://crecim.cat/projectes/ajuts-per-a-equipament-i-infraestructura-destinats-a-la-recerca-peir-2006/).\
+2006)](https://www.crecim.cat/ca/projecte/ajuts-per-a-equipament-i-infraestructura-destinats-a-la-recerca-peir-2006).\
 **Funding Entity:** Generalitat de Catalunya; Departament d\'Innovació,
 Universitats i Empresa Direcció General de Recerca. 2.723,25€\
 **Participating Entities:** CRECIM- Universitat Autònoma de Barcelona
@@ -267,7 +267,7 @@ Universitats i Empresa Direcció General de Recerca. 2.723,25€\
 
 **2005PEIR0050/59:** [Ajuts per a equipaent i infraestructura destinats
 a la recerca (PEIR
-2005)](http://crecim.cat/projectes/ajuts-per-a-equipament-i-infraestructura-destinats-a-la-recerca-peir-2005/).\
+2005)](https://www.crecim.cat/ca/projecte/ajuts-per-a-equipament-i-infraestructura-destinats-a-la-recerca-peir-2005).\
 **Funding Entity:** Generalitat de Catalunya; Departament d\'Innovació,
 Universitats i Empresa Direcció General de Recerca. 8.798,75€\
 **Participating Entities:** CRECIM- Universitat Autònoma de Barcelona
@@ -286,7 +286,7 @@ Catalunya. Convocatòria ARIE.\
 **IP**:Roser Pintó Casulleras
 
 **129358-CP-1-2006-1-DE-C0MENIUS-C21: **[Crossing Boundaries in Science
-Teacher Education (CROSSNET)](http://crecim.cat/projectes/crossnet/). \
+Teacher Education (CROSSNET)](https://www.crecim.cat/ca/projecte/crossing-boundaries-in-science-teacher-education-crossnet). \
 **Funding Entity:** European Commission. DG Education and Culture.
 28.286€ (21.660€ UAB)\
 **Participating Entities:** IPN, University of Kiel (DE), Universität
@@ -297,7 +297,7 @@ Universitat Autònoma de Barcelona (UAB), (ES)\
 **Duration**:2006 - 2009
 
 **PRP2005-24: **[e-Inclusion for Sience Teacher Education
-(MEISTE).](http://crecim.cat/projectes/meiste/)\
+(MEISTE).](https://www.crecim.cat/ca/projecte/monitoring-e-inclusion-for-science-teacher-education-meiste)\
 **Funding Entity:** Universitat Autònoma de Barcelona (UAB). 5.900€\
 **Participating Entities:** CRECIM- Universitat Autònoma de Barcelona
 (ES)\
@@ -306,7 +306,7 @@ Universitat Autònoma de Barcelona (UAB), (ES)\
 
 **SEJ2005-24021-E**: [ESERA 2005 (European Science Education Research
 Association)-
-CRESILS](http://crecim.cat/projectes/v-congreso-de-esera-european-science-education-research-association/).\
+CRESILS](https://www.crecim.cat/ca/projecte/esera-2005-european-science-education-research-association-cresils).\
 **Funding Entity:** Ministerio de Educación i Ciencia. 12.000€\
 **Participating Entities:** CRECIM- Universitat Autònoma de Barcelona
 (ES)\
@@ -315,7 +315,7 @@ CRESILS](http://crecim.cat/projectes/v-congreso-de-esera-european-science-educat
 
 **2004ARIE-00063:**[ Potencialitats dels sensors pel treball
 experimental a secundaria
-(POSTRES)](http://crecim.cat/projectes/postres/). \
+(POSTRES)](https://www.crecim.cat/ca/projecte/potencialitats-dels-sensors-pel-treball-experimental-a-secundaria-postres). \
 **Funding Entity:** Agència de Gestió d\'Ajuts Universitaris i de
 Recerca (AGAUR). 7.200€\
 **Participating Entities:** CRECIM- Universitat Autònoma de Barcelona
@@ -330,7 +330,7 @@ Research Association.\
 **IP:** Roser Pintó Casulleras
 
 **SEC2002-04254-C02-02:** [Investigación sobre la enseñanza de la física
-a través de Internet (IEFNET).](http://crecim.cat/projectes/iefnet/)\
+a través de Internet (IEFNET).](https://www.crecim.cat/ca/projecte/investigacion-sobre-la-ensenanza-de-la-fisica-con-internet-iefnet)\
 **Funding Entity:** Ministerio de Ciencia y Tecnología. 24.240€\
 **Participating Entities:** CRECIM- Universitat Autònoma de Barcelona
 (ES)\
@@ -339,7 +339,7 @@ a través de Internet (IEFNET).](http://crecim.cat/projectes/iefnet/)\
 
 **DIF2003-10252-E:** [Difusió d\'informació actualitzada i riorosa
 entorn les energies reonvables
-(DIFER)](http://crecim.cat/projectes/difer/).\
+(DIFER)](https://www.crecim.cat/ca/projecte/difusio-dinformacio-actualitzada-i-rigorosa-entorn-les-energies-renovables-difer).\
 **Funding Entity:** Ministerio de Educaión  y Ciencia. 24.500€\
 **Participating Entities:** IPN, University of Kiel (DE), University of
 Viena (AT), University of Limerick (IE),CRECIM- Universitat Autònoma de
@@ -350,7 +350,7 @@ Barcelona (ES), Lund University (SE), RFBZ (DE).\
 **106278-CP-1-2002-1-DE-COM:** [Developing Best Practices for
 School-Based Science teacher education. European Development of
 Innovative Science Teaching
-(EUDIST).](http://crecim.cat/projectes/eudist/)\
+(EUDIST).](https://www.crecim.cat/ca/projecte/developing-best-practices-for-school-based-science-teacher-education-eudist)\
 **Funding Entity:** Directorate Generale Education, Culture and Youth.
 230.889€\
 **Participating Entities:** CRECIM- Universitat Autònoma de Barcelona
@@ -360,7 +360,7 @@ Innovative Science Teaching
 
 **HPSE-CT-2002-60055:** [Integrating knowledge for the use of informatic
 tools in science
-education (IKUITSE)](http://crecim.cat/projectes/ikuitse/).\
+education (IKUITSE)](https://www.crecim.cat/ca/projecte/integrating-knowledge-for-the-use-of-informatic-tools-in-science-education-ikuitse).\
 **Funding Entity:** European Comission, DG Research. Human Potential in
 the knowledge based society. 6th Framework. 56.000€\
 **Participating Entities:** CRECIM- Universitat Autònoma de Barcelona
@@ -377,7 +377,7 @@ Society (PTTIS).\
 **IP**:Roser Pintó Casulleras
 
 **SOE2-CT97-2020: **[Science Teacher Training in an Information Society
-(STTIS)](http://crecim.cat/projectes/sttis/).\
+(STTIS)](https://www.crecim.cat/ca/projecte/science-teacher-training-in-an-information-society-sttis).\
 **Funding Entity:** Directorate Generale Research 4th Framework.
 Programm TSER (Targeted Socioeconomic Research).\
 **Participating Entities:** CRECIM- Universitat Autònoma de Barcelona
@@ -392,7 +392,7 @@ Programm TSER (Targeted Socioeconomic Research).\
 
 **2014 SGR 942:** [Tecnologia informàtica i recerca sobre educació
 científica (TIREC
-2014).](http://crecim.cat/projectes/tecnologia-informatica-i-recerca-sobre-leducacio-cientifica-tirec-2014/)\
+2014).](https://www.crecim.cat/ca/projecte/tecnologia-informatica-i-recerca-sobre-leducacio-cientifica-tirec-2014)\
 **Funding Entity:** Secretaria d\'Universitats i Recerca, Departament
 d\'Economia i Coneixement. Generalitat de Catalunya. 30.600€\
 **Participating Entities:** Universitat Autònoma de Barcelona (UAB)\
@@ -401,7 +401,7 @@ d\'Economia i Coneixement. Generalitat de Catalunya. 30.600€\
 
 **2009 SGR 737:** [Teconologia informàtica i recerca sobre educació
 científica (TIREC
-2009)](http://crecim.cat/projectes/tecnologia-informatica-i-recerca-sobre-leducacio-cientifica-tirec-2009/)\
+2009)](https://www.crecim.cat/ca/projecte/tecnologia-informatica-i-recerca-sobre-leducacio-cientifica-tirec-2009)\
 **Funding Entity:** Secretaria d\'Universitats i Recerca, Departament
 d\'Economia i Coneixement. Generalitat de Catalunya 38.400€\
 **Participating Entities:** Universitat Autònoma de Barcelona (UAB)\
@@ -422,7 +422,7 @@ LIEC\
 
 **2007/ARCS/00114:** [I Escola de Tardor de Catalunya per joves
 ivestigadors en educació cinetífica i
-matemàtica](http://crecim.cat/projectes/i-escola-de-tardor-de-catalunya-per-joves-investigadors-en-educacio-cientifica-i-matematica/).
+matemàtica](https://www.crecim.cat/ca/projecte/i-escola-de-tardor-de-catalunya-per-joves-investigadors-en-educacio-cientifica-i-matematica).
 Xarxa REMIC.\
 **Funding Entity:** Agència de Gestió d\'Ajuts Universitaris i de
 Recerca.(AGAUR) 4.000€\
@@ -436,7 +436,7 @@ Universitat Politècnica de Catalunya, Universita Oberta de Catalunya.\
 
 **2005SGE00114:** [Tecnologia Informàtica i Recerca sobre l\'Educació
 Científica (TIREC
-2005).](http://crecim.cat/projectes/tecnologia-informatica-i-recerca-sobre-leducacio-cientifica-tirec/)\
+2005).](https://www.crecim.cat/ca/projecte/tecnologia-informatica-i-recerca-sobre-leducacio-cientifica-tirec-2005)\
 **Funding Entity:**Agència de Gestió d\'Ajuts Universitaris i de Recerca
 (AGAUR). 39.000€\
 **Participating Entities:** Universitat Autònoma de Barcelona (UAB)\
