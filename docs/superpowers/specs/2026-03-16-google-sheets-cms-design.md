@@ -284,7 +284,7 @@ The adapter sets the menu weight for each content type to match the current site
 
 ### Adapter pattern
 
-Each adapter generates a full section page (no `_index.md` needed) by calling `.AddPage` with `kind: "section"`. This includes title, slug, menu configuration, and the rendered body content.
+Each adapter generates a regular page (no `_index.md` needed) by calling `.AddPage`. The page includes title, slug, menu configuration, and the rendered body content. `kind` is omitted (defaults to `"page"`), which ensures Hugo renders the page with `single.html` (displaying the content body) rather than `list.html`.
 
 Each adapter follows this structure:
 
@@ -293,23 +293,26 @@ Each adapter follows this structure:
 3. Look up the translated title, slug, section headings, and field labels from translation dicts
 4. Group entries by type/section
 5. Generate markdown content string with proper formatting
-6. Call `.AddPage` with `kind: "section"`, `title`, `path`, `params` (including `slug` and `menu`), and `content`
+6. Call `.AddPage` with `title`, `path`, `slug`, `menus`, and `content` as top-level fields
 
 Example `.AddPage` call:
 
 ```go-html-template
 {{ $page := dict
   "content" (dict "mediaType" "text/markdown" "value" $content)
-  "kind" "section"
   "path" "publicacions-cientifiques"
   "title" (index $titles $lang)
-  "params" (dict
-    "slug" (index $slugs $lang)
-    "menu" (dict "main" (dict "weight" 4))
-  )
+  "slug" (index $slugs $lang)
+  "menus" (dict "main" (dict "weight" 4))
 }}
 {{ $.AddPage $page }}
 ```
+
+Notes:
+- `slug` and `menus` are top-level fields in the `AddPage` dict, not inside `params`. Hugo treats them as front matter fields.
+- `menus` (plural) is the correct field name for the `AddPage` API.
+- `slug` only works on regular pages (not section pages), which is why we use the default `kind: "page"`.
+- Menu entries with map properties (including `weight`) are supported since Hugo v0.144.0; the spec targets v0.145.0.
 
 ### Translation approach
 
@@ -422,7 +425,7 @@ The sheet is pre-populated during migration with all existing data. Column heade
 1. **Upgrade Hugo** — upgrade to >= 0.126.0 locally; create `netlify.toml` pinning the version for production
 2. **Parse existing markdown** — one-time Python script extracts all entries from current Hugo content files into the JSON structure
 3. **Write JSON files** to `data/`
-4. **Build content adapters** — create `_content.gotmpl` and `_index.md` files for each content type in each language directory
+4. **Build content adapters** — create `_content.gotmpl` files for each content type in each language directory. Note: the existing `.md` files (e.g., `publicacions-cientifiques.md`) must be deleted before creating the directory of the same base name (e.g., `publicacions-cientifiques/`), as a file and directory cannot coexist with the same name
 5. **Verify** — run `hugo server` and compare output against current site. Content should be equivalent with cleaner/more consistent formatting
 6. **Remove old markdown files** — delete the hand-written markdown for the 8 migrated content types
 7. **Populate Google Sheet** — generate CSVs from JSON for import into Google Sheets. From this point, the sheet is the source of truth
