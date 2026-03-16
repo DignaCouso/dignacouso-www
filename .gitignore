@@ -4,3 +4,6 @@
 
 # npm
 /node_modules
+
+# CSV exports for Google Sheets import
+/sheets_csv
