@@ -213,18 +213,18 @@ The site uses per-language `contentDir` configuration (`content/ca/`, `content/e
 
 ### URL preservation
 
-Adapter directories use the current Catalan slug names to preserve existing URLs. This ensures no external links break.
+Adapter directories use the current Catalan slug names as directory names. English and Spanish `_index.md` files include a `slug` field to preserve the current translated URLs.
 
-| Content Type | Directory Name |
-|---|---|
-| Publications | `publicacions-cientifiques/` |
-| Research Projects | `projectes-de-recerca/` |
-| Books and Chapters | `llibres-i-capitols/` |
-| Conference Contributions | `aportacions-a-congressos/` |
-| Invited Talks | `conferencies/` |
-| Contracts and Agreements | `contractes-i-convenis/` |
-| Thesis Supervision | `direccio-de-treballs/` |
-| Teaching Materials | `material-didactic/` |
+| Content Type | Directory Name | ES slug | EN slug |
+|---|---|---|---|
+| Publications | `publicacions-cientifiques/` | `publicaciones-cientificas` | `scientific-publications` |
+| Research Projects | `projectes-de-recerca/` | `proyectos-de-investigacion` | `research-projects` |
+| Books and Chapters | `llibres-i-capitols/` | `libros-y-capitulos` | `books-and-chapters` |
+| Conference Contributions | `aportacions-a-congressos/` | `aportaciones-a-congresos` | `conference-contributions` |
+| Invited Talks | `conferencies/` | `conferencias` | `conferences` |
+| Contracts and Agreements | `contractes-i-convenis/` | `contratos-y-convenios` | `contracts-and-agreements` |
+| Thesis Supervision | `direccio-de-treballs/` | `direccion-de-trabajos` | `doctoral-thesis-supervision` |
+| Teaching Materials | `material-didactic/` | `material-didactico` | `teaching-materials` |
 
 ### File structure
 
@@ -272,8 +272,9 @@ data/
 
 ### _index.md files
 
-Each `_index.md` provides the section title and menu entry for its content type. Example for Catalan publications:
+Each `_index.md` provides the section title, menu entry, and (for EN/ES) the translated slug. Examples for publications:
 
+Catalan (`content/ca/publicacions-cientifiques/_index.md`):
 ```yaml
 ---
 title: "Publicacions Científiques"
@@ -283,7 +284,33 @@ menu:
 ---
 ```
 
-The English version would have `title: "Scientific Publications"`, etc. These are small static files that don't change.
+English (`content/en/publicacions-cientifiques/_index.md`):
+```yaml
+---
+title: "Scientific Publications"
+slug: "scientific-publications"
+menu:
+  main:
+    weight: 4
+---
+```
+
+Spanish (`content/es/publicacions-cientifiques/_index.md`):
+```yaml
+---
+title: "Publicaciones Científicas"
+slug: "publicaciones-cientificas"
+menu:
+  main:
+    weight: 4
+---
+```
+
+These are small static files that don't change.
+
+### Adapter and _index.md interaction
+
+The current site renders each content type as a single long list page (not individual sub-pages). The content adapter generates this list page content by calling `.AddPage` with the section's path. The `_index.md` file provides front matter (title, slug, menu) for the section. The adapter's `.AddPage` generates the page content that appears below the title.
 
 ### Adapter pattern
 
@@ -294,7 +321,7 @@ Each adapter follows this structure:
 3. Look up translated section headings and field labels from translation dicts
 4. Group entries by type/section
 5. Generate markdown content string with proper formatting
-6. Call `.AddPage` with the content
+6. Call `.AddPage` with the content and the section path
 
 ### Translation approach
 
