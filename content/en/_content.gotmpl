@@ -117,3 +117,705 @@
 {{ end }}
 
 {{ .AddPage $page }}
+
+
+{{/* ======================================================================
+     PROJECTS
+     ====================================================================== */}}
+{{ $projects := .Site.Data.projects }}
+
+{{ $projTitles := dict
+    "ca" "Projectes de recerca"
+    "es" "Proyectos de investigación"
+    "en" "Research Projects"
+}}
+{{ $projSlugs := dict
+    "ca" ""
+    "es" "proyectos-de-investigacion"
+    "en" "research-projects"
+}}
+
+{{/* Section headings */}}
+{{ $projSectionHeadings := dict
+    "competitive" (dict
+        "ca" "Projectes R+D+i competitius"
+        "es" "Proyectos R+D+i competitivos"
+        "en" "Competitive R+D+i Projects"
+    )
+    "networks" (dict
+        "ca" "Xarxes de recerca I+D"
+        "es" "Redes de investigación I+D"
+        "en" "R+D Research Networks"
+    )
+}}
+
+{{/* PI role headings */}}
+{{ $projRoleHeadings := dict
+    "ip" (dict
+        "ca" "IP: Digna Couso"
+        "es" "IP: Digna Couso"
+        "en" "PI: Digna Couso"
+    )
+    "ip-national" (dict
+        "ca" "IP Nacional"
+        "es" "IP Nacional"
+        "en" "National PI"
+    )
+    "other-pi" (dict
+        "ca" "Altres IP"
+        "es" "Otros IP"
+        "en" "Other PI"
+    )
+}}
+
+{{/* Labels */}}
+{{ $projLblFunding := dict "ca" "Entitat Finançadora" "es" "Entidad Financiadora" "en" "Funding Entity" }}
+{{ $projLblDuration := dict "ca" "Durada" "es" "Duración" "en" "Duration" }}
+{{ $projLblParticipants := dict "ca" "Entitats Participants" "es" "Entidades Participantes" "en" "Participating Entities" }}
+{{ $projLblPI := dict "ca" "IP" "es" "IP" "en" "PI" }}
+
+{{ $projTitle := index $projTitles $lang }}
+{{ $projSlug := index $projSlugs $lang }}
+
+{{ $projBody := slice }}
+{{ $sectionOrder := slice "competitive" "networks" }}
+{{ $roleOrder := slice "ip" "ip-national" "other-pi" }}
+
+{{ range $idx, $section := $sectionOrder }}
+    {{ $secHeading := index (index $projSectionHeadings $section) $lang }}
+    {{ $projBody = $projBody | append (printf "**%s**" $secHeading) }}
+    {{ $projBody = $projBody | append "" }}
+
+    {{ range $ridx, $role := $roleOrder }}
+        {{/* Check if any projects exist for this section+role */}}
+        {{ $hasEntries := false }}
+        {{ range $projects }}
+            {{ if and (eq .section $section) (eq .pi_role $role) }}
+                {{ $hasEntries = true }}
+            {{ end }}
+        {{ end }}
+
+        {{ if $hasEntries }}
+            {{ $roleHeading := index (index $projRoleHeadings $role) $lang }}
+            {{ $projBody = $projBody | append (printf "**%s:**" $roleHeading) }}
+            {{ $projBody = $projBody | append "" }}
+
+            {{ range $projects }}
+                {{ if and (eq .section $section) (eq .pi_role $role) }}
+                    {{ $entry := "" }}
+                    {{ if and .title .url }}
+                        {{ $entry = printf "**%s:** [%s](%s)" .code .title .url }}
+                    {{ else if .title }}
+                        {{ $entry = printf "**%s:** %s" .code .title }}
+                    {{ else }}
+                        {{ $entry = printf "**%s:**" .code }}
+                    {{ end }}
+                    {{ $projBody = $projBody | append (printf "%s\\" $entry) }}
+
+                    {{ if .funding_entity }}
+                        {{ $lbl := index $projLblFunding $lang }}
+                        {{ if .budget }}
+                            {{ $projBody = $projBody | append (printf "**%s:** %s / %s\\" $lbl .funding_entity .budget) }}
+                        {{ else }}
+                            {{ $projBody = $projBody | append (printf "**%s:** %s\\" $lbl .funding_entity) }}
+                        {{ end }}
+                    {{ end }}
+
+                    {{ if .participants }}
+                        {{ $lbl := index $projLblParticipants $lang }}
+                        {{ $projBody = $projBody | append (printf "**%s:** %s\\" $lbl .participants) }}
+                    {{ end }}
+
+                    {{ if .duration }}
+                        {{ $lbl := index $projLblDuration $lang }}
+                        {{ $projBody = $projBody | append (printf "**%s:** %s" $lbl .duration) }}
+                    {{ end }}
+
+                    {{ if .pi }}
+                        {{ $lbl := index $projLblPI $lang }}
+                        {{ $projBody = $projBody | append (printf "**%s:** %s" $lbl .pi) }}
+                    {{ end }}
+
+                    {{ $projBody = $projBody | append "" }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $projContent := delimit $projBody "\n" }}
+
+{{ $projPage := dict
+    "content" (dict "mediaType" "text/markdown" "value" $projContent)
+    "path"    "projectes-de-recerca"
+    "title"   $projTitle
+    "menus"   (dict "main" (dict "weight" 2))
+}}
+
+{{ if $projSlug }}
+    {{ $projPage = merge $projPage (dict "slug" $projSlug) }}
+{{ end }}
+
+{{ .AddPage $projPage }}
+
+
+{{/* ======================================================================
+     BOOKS AND CHAPTERS
+     ====================================================================== */}}
+{{ $books := .Site.Data.books }}
+
+{{ $bookTitles := dict
+    "ca" "Llibres i capítols"
+    "es" "Libros y capítulos"
+    "en" "Books and chapters"
+}}
+{{ $bookSlugs := dict
+    "ca" ""
+    "es" "libros-y-capitulos"
+    "en" "books-and-chapters"
+}}
+
+{{ $bookHeadings := dict
+    "chapter" (dict
+        "ca" "Capítols de llibre"
+        "es" "Capítulos de libros"
+        "en" "Chapters"
+    )
+    "proceedings" (dict
+        "ca" "Proceedings"
+        "es" "Proceedings"
+        "en" "Proceedings"
+    )
+    "edited-book" (dict
+        "ca" "Edicions"
+        "es" "Ediciones"
+        "en" "Editions"
+    )
+}}
+
+{{ $bookInLabel := dict "ca" "Dins de" "es" "Dentro de" "en" "In" }}
+
+{{ $bookTitle := index $bookTitles $lang }}
+{{ $bookSlug := index $bookSlugs $lang }}
+
+{{ $bookBody := slice }}
+{{ $bookTypeOrder := slice "chapter" "proceedings" "edited-book" }}
+
+{{ range $idx, $btype := $bookTypeOrder }}
+    {{ $heading := index (index $bookHeadings $btype) $lang }}
+    {{ $bookBody = $bookBody | append (printf "**%s:**" $heading) }}
+    {{ $bookBody = $bookBody | append "" }}
+
+    {{ range $books }}
+        {{ if eq .type $btype }}
+            {{ if or .authors .title }}
+                {{ $entry := "" }}
+                {{ if .authors }}
+                    {{ $entry = printf "%s (%d)." .authors (int .year) }}
+                {{ end }}
+
+                {{ if .url }}
+                    {{ $entry = printf "%s [%s](%s)." $entry .title .url }}
+                {{ else if .title }}
+                    {{ $entry = printf "%s %s." $entry .title }}
+                {{ end }}
+
+                {{ if and (eq $btype "chapter") .book_title }}
+                    {{ $inLabel := index $bookInLabel $lang }}
+                    {{ if and .pages .publisher }}
+                        {{ $entry = printf "%s %s *%s* (pp. %s). %s" $entry $inLabel .book_title .pages .publisher }}
+                    {{ else if .pages }}
+                        {{ $entry = printf "%s %s *%s* (pp. %s)" $entry $inLabel .book_title .pages }}
+                    {{ else if .publisher }}
+                        {{ $entry = printf "%s %s *%s*. %s" $entry $inLabel .book_title .publisher }}
+                    {{ else }}
+                        {{ $entry = printf "%s %s *%s*" $entry $inLabel .book_title }}
+                    {{ end }}
+                {{ else if .book_title }}
+                    {{ if .publisher }}
+                        {{ $entry = printf "%s *%s*. %s" $entry .book_title .publisher }}
+                    {{ else }}
+                        {{ $entry = printf "%s *%s*" $entry .book_title }}
+                    {{ end }}
+                {{ else if .publisher }}
+                    {{ $entry = printf "%s %s" $entry .publisher }}
+                {{ end }}
+
+                {{ $bookBody = $bookBody | append $entry }}
+                {{ $bookBody = $bookBody | append "" }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $bookContent := delimit $bookBody "\n" }}
+
+{{ $bookPage := dict
+    "content" (dict "mediaType" "text/markdown" "value" $bookContent)
+    "path"    "llibres-i-capitols"
+    "title"   $bookTitle
+    "menus"   (dict "main" (dict "weight" 5))
+}}
+
+{{ if $bookSlug }}
+    {{ $bookPage = merge $bookPage (dict "slug" $bookSlug) }}
+{{ end }}
+
+{{ .AddPage $bookPage }}
+
+
+{{/* ======================================================================
+     CONFERENCE CONTRIBUTIONS
+     ====================================================================== */}}
+{{ $conferences := .Site.Data.conferences }}
+
+{{ $confTitles := dict
+    "ca" "Aportacions a congressos"
+    "es" "Aportaciones a congresos"
+    "en" "Conference contributions"
+}}
+{{ $confSlugs := dict
+    "ca" ""
+    "es" "aportaciones-a-congresos"
+    "en" "conference-contributions"
+}}
+
+{{ $confHeadings := dict
+    "plenary" (dict
+        "ca" "Ponent convidat en sessió plenària o taula rodona"
+        "es" "Ponente invitado en sesión plenaria o mesa redonda"
+        "en" "Invited speaker at plenary session or round table"
+    )
+    "symposium" (dict
+        "ca" "Simposis i tallers"
+        "es" "Simposios y talleres"
+        "en" "Symposia and workshops"
+    )
+    "oral" (dict
+        "ca" "Comunicacions orals"
+        "es" "Comunicaciones orales"
+        "en" "Oral presentations"
+    )
+    "poster" (dict
+        "ca" "Pòsters"
+        "es" "Pósters"
+        "en" "Posters"
+    )
+}}
+
+{{ $confTitle := index $confTitles $lang }}
+{{ $confSlug := index $confSlugs $lang }}
+
+{{ $confBody := slice }}
+{{ $confTypeOrder := slice "plenary" "symposium" "oral" "poster" }}
+
+{{ range $idx, $ctype := $confTypeOrder }}
+    {{ $heading := index (index $confHeadings $ctype) $lang }}
+    {{ $confBody = $confBody | append (printf "**%s:**" $heading) }}
+    {{ $confBody = $confBody | append "" }}
+
+    {{ range $conferences }}
+        {{ if eq .type $ctype }}
+            {{ if .authors }}
+                {{ $entry := printf "%s (%d)." .authors (int .year) }}
+
+                {{ if .url }}
+                    {{ $entry = printf "%s [%s](%s)." $entry .title .url }}
+                {{ else if .title }}
+                    {{ $entry = printf "%s %s." $entry .title }}
+                {{ end }}
+
+                {{ if .conference }}
+                    {{ $entry = printf "%s %s" $entry .conference }}
+                {{ end }}
+
+                {{ $confBody = $confBody | append $entry }}
+                {{ $confBody = $confBody | append "" }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $confContent := delimit $confBody "\n" }}
+
+{{ $confPage := dict
+    "content" (dict "mediaType" "text/markdown" "value" $confContent)
+    "path"    "aportacions-a-congressos"
+    "title"   $confTitle
+    "menus"   (dict "main" (dict "weight" 6))
+}}
+
+{{ if $confSlug }}
+    {{ $confPage = merge $confPage (dict "slug" $confSlug) }}
+{{ end }}
+
+{{ .AddPage $confPage }}
+
+
+{{/* ======================================================================
+     TALKS (CONFERENCIES)
+     ====================================================================== */}}
+{{ $talks := .Site.Data.talks }}
+
+{{ $talkTitles := dict
+    "ca" "Conferències"
+    "es" "Conferencias"
+    "en" "Conferences"
+}}
+{{ $talkSlugs := dict
+    "ca" ""
+    "es" "conferencias"
+    "en" "conferences"
+}}
+
+{{ $talkTitle := index $talkTitles $lang }}
+{{ $talkSlug := index $talkSlugs $lang }}
+
+{{ $talkBody := slice }}
+
+{{ range $talks }}
+    {{ if .title }}
+        {{ $linkUrl := "" }}
+        {{ if .video_url }}
+            {{ $linkUrl = .video_url }}
+        {{ else if .url }}
+            {{ $linkUrl = .url }}
+        {{ end }}
+
+        {{ $entry := printf "(%d)." (int .year) }}
+
+        {{ if $linkUrl }}
+            {{ $entry = printf "%s [%s](%s)." $entry .title $linkUrl }}
+        {{ else }}
+            {{ $entry = printf "%s %s." $entry .title }}
+        {{ end }}
+
+        {{ if .event }}
+            {{ $entry = printf "%s %s" $entry .event }}
+        {{ end }}
+
+        {{ if .organizer }}
+            {{ $entry = printf "%s. %s" $entry .organizer }}
+        {{ end }}
+
+        {{ $talkBody = $talkBody | append $entry }}
+        {{ $talkBody = $talkBody | append "" }}
+    {{ end }}
+{{ end }}
+
+{{ $talkContent := delimit $talkBody "\n" }}
+
+{{ $talkPage := dict
+    "content" (dict "mediaType" "text/markdown" "value" $talkContent)
+    "path"    "conferencies"
+    "title"   $talkTitle
+    "menus"   (dict "main" (dict "weight" 11))
+}}
+
+{{ if $talkSlug }}
+    {{ $talkPage = merge $talkPage (dict "slug" $talkSlug) }}
+{{ end }}
+
+{{ .AddPage $talkPage }}
+
+
+{{/* ======================================================================
+     CONTRACTS AND AGREEMENTS
+     ====================================================================== */}}
+{{ $contracts := .Site.Data.contracts }}
+
+{{ $contrTitles := dict
+    "ca" "Contractes i convenis"
+    "es" "Contratos y convenios"
+    "en" "Contracts and agreements"
+}}
+{{ $contrSlugs := dict
+    "ca" ""
+    "es" "contratos-y-convenios"
+    "en" "contracts-and-agreements"
+}}
+
+{{ $contrRoleHeadings := dict
+    "ip" (dict
+        "ca" "IP: Digna Couso"
+        "es" "IP: Digna Couso"
+        "en" "PI: Digna Couso"
+    )
+    "other-pi" (dict
+        "ca" "Altres IP"
+        "es" "Otros IP"
+        "en" "Other PI"
+    )
+}}
+
+{{ $contrLblFunding := dict "ca" "Entitat finançadora" "es" "Entidad financiadora" "en" "Funding entity" }}
+{{ $contrLblDuration := dict "ca" "Durada" "es" "Duración" "en" "Duration" }}
+{{ $contrLblPI := dict "ca" "IP" "es" "IP" "en" "PI" }}
+
+{{ $contrTitle := index $contrTitles $lang }}
+{{ $contrSlug := index $contrSlugs $lang }}
+
+{{ $contrBody := slice }}
+{{ $contrHeading := "" }}
+{{ if eq $lang "ca" }}
+    {{ $contrHeading = "Contractes i convenis R+D+i" }}
+{{ else if eq $lang "es" }}
+    {{ $contrHeading = "Contratos y convenios R+D+i" }}
+{{ else }}
+    {{ $contrHeading = "R+D+i Contracts and agreements" }}
+{{ end }}
+{{ $contrBody = $contrBody | append (printf "**%s**" $contrHeading) }}
+{{ $contrBody = $contrBody | append "" }}
+
+{{ $contrRoleOrder := slice "ip" "other-pi" }}
+
+{{ range $ridx, $role := $contrRoleOrder }}
+    {{ $hasEntries := false }}
+    {{ range $contracts }}
+        {{ if eq .pi_role $role }}
+            {{ $hasEntries = true }}
+        {{ end }}
+    {{ end }}
+
+    {{ if $hasEntries }}
+        {{ $roleHeading := index (index $contrRoleHeadings $role) $lang }}
+        {{ $contrBody = $contrBody | append (printf "**%s:**" $roleHeading) }}
+        {{ $contrBody = $contrBody | append "" }}
+
+        {{ range $contracts }}
+            {{ if eq .pi_role $role }}
+                {{ $entry := "" }}
+                {{ if .url }}
+                    {{ $entry = printf "[%s](%s)" .title .url }}
+                {{ else }}
+                    {{ $entry = .title }}
+                {{ end }}
+                {{ $contrBody = $contrBody | append (printf "%s\\" $entry) }}
+
+                {{ if .entity }}
+                    {{ $lbl := index $contrLblFunding $lang }}
+                    {{ $contrBody = $contrBody | append (printf "**%s:** %s\\" $lbl .entity) }}
+                {{ end }}
+
+                {{ if .duration }}
+                    {{ $lbl := index $contrLblDuration $lang }}
+                    {{ $contrBody = $contrBody | append (printf "**%s:** %s" $lbl .duration) }}
+                {{ end }}
+
+                {{ if .pi }}
+                    {{ $lbl := index $contrLblPI $lang }}
+                    {{ $contrBody = $contrBody | append (printf "**%s:** %s" $lbl .pi) }}
+                {{ end }}
+
+                {{ $contrBody = $contrBody | append "" }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $contrContent := delimit $contrBody "\n" }}
+
+{{ $contrPage := dict
+    "content" (dict "mediaType" "text/markdown" "value" $contrContent)
+    "path"    "contractes-i-convenis"
+    "title"   $contrTitle
+    "menus"   (dict "main" (dict "weight" 3))
+}}
+
+{{ if $contrSlug }}
+    {{ $contrPage = merge $contrPage (dict "slug" $contrSlug) }}
+{{ end }}
+
+{{ .AddPage $contrPage }}
+
+
+{{/* ======================================================================
+     THESES (DIRECCIO DE TREBALLS)
+     ====================================================================== */}}
+{{ $theses := .Site.Data.theses }}
+
+{{ $thesTitles := dict
+    "ca" "Direcció de treballs"
+    "es" "Dirección de trabajos"
+    "en" "Doctoral thesis supervision"
+}}
+{{ $thesSlugs := dict
+    "ca" ""
+    "es" "direccion-de-trabajos"
+    "en" "doctoral-thesis-supervision"
+}}
+
+{{ $thesHeadings := dict
+    "phd-completed" (dict
+        "ca" "Tesis doctorals"
+        "es" "Tesis doctorales"
+        "en" "Doctoral theses"
+    )
+    "phd-in-progress" (dict
+        "ca" "Tesis doctorals en curs"
+        "es" "Tesis doctorales en curso"
+        "en" "Doctoral theses in progress"
+    )
+    "master" (dict
+        "ca" "Treballs de Final de Màster de Recerca"
+        "es" "Trabajos de Final de Máster de Investigación"
+        "en" "Research Master's theses"
+    )
+    "tfg" (dict
+        "ca" "Treballs de Final de Grau"
+        "es" "Trabajos de Fin de Grado"
+        "en" "Bachelor's theses"
+    )
+}}
+
+{{ $thesCodir := dict "ca" "Codirecció" "es" "Codirección" "en" "Co-supervision" }}
+
+{{ $thesTitle := index $thesTitles $lang }}
+{{ $thesSlug := index $thesSlugs $lang }}
+
+{{ $thesBody := slice }}
+{{ $thesTypeOrder := slice "phd-completed" "phd-in-progress" "master" "tfg" }}
+
+{{ range $idx, $ttype := $thesTypeOrder }}
+    {{/* Determine which entries match this group */}}
+    {{ $hasEntries := false }}
+    {{ range $theses }}
+        {{ if eq $ttype "phd-completed" }}
+            {{ if and (eq .type "phd") (eq .status "completed") }}
+                {{ $hasEntries = true }}
+            {{ end }}
+        {{ else if eq $ttype "phd-in-progress" }}
+            {{ if and (eq .type "phd") (eq .status "in-progress") }}
+                {{ $hasEntries = true }}
+            {{ end }}
+        {{ else if eq $ttype "master" }}
+            {{ if eq .type "master" }}
+                {{ $hasEntries = true }}
+            {{ end }}
+        {{ else if eq $ttype "tfg" }}
+            {{ if eq .type "tfg" }}
+                {{ $hasEntries = true }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+
+    {{ if $hasEntries }}
+        {{ $heading := index (index $thesHeadings $ttype) $lang }}
+        {{ $thesBody = $thesBody | append (printf "**%s :**" $heading) }}
+        {{ $thesBody = $thesBody | append "" }}
+
+        {{ range $theses }}
+            {{ $match := false }}
+            {{ if eq $ttype "phd-completed" }}
+                {{ if and (eq .type "phd") (eq .status "completed") }}
+                    {{ $match = true }}
+                {{ end }}
+            {{ else if eq $ttype "phd-in-progress" }}
+                {{ if and (eq .type "phd") (eq .status "in-progress") }}
+                    {{ $match = true }}
+                {{ end }}
+            {{ else if eq $ttype "master" }}
+                {{ if eq .type "master" }}
+                    {{ $match = true }}
+                {{ end }}
+            {{ else if eq $ttype "tfg" }}
+                {{ if eq .type "tfg" }}
+                    {{ $match = true }}
+                {{ end }}
+            {{ end }}
+
+            {{ if $match }}
+                {{ $entry := printf "%s (%d)." .author (int .year) }}
+
+                {{ if .url }}
+                    {{ $entry = printf "%s [%s](%s)." $entry .title .url }}
+                {{ else if .title }}
+                    {{ $entry = printf "%s %s." $entry .title }}
+                {{ end }}
+
+                {{ if .university }}
+                    {{ $entry = printf "%s %s" $entry .university }}
+                {{ end }}
+
+                {{ if eq .role "co-director" }}
+                    {{ $codirLabel := index $thesCodir $lang }}
+                    {{ $entry = printf "%s (%s)" $entry $codirLabel }}
+                {{ end }}
+
+                {{ $thesBody = $thesBody | append $entry }}
+                {{ $thesBody = $thesBody | append "" }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $thesContent := delimit $thesBody "\n" }}
+
+{{ $thesPage := dict
+    "content" (dict "mediaType" "text/markdown" "value" $thesContent)
+    "path"    "direccio-de-treballs"
+    "title"   $thesTitle
+    "menus"   (dict "main" (dict "weight" 9))
+}}
+
+{{ if $thesSlug }}
+    {{ $thesPage = merge $thesPage (dict "slug" $thesSlug) }}
+{{ end }}
+
+{{ .AddPage $thesPage }}
+
+
+{{/* ======================================================================
+     TEACHING MATERIALS
+     ====================================================================== */}}
+{{ $materials := .Site.Data.materials }}
+
+{{ $matTitles := dict
+    "ca" "Material didàctic"
+    "es" "Material didáctico"
+    "en" "Teaching materials"
+}}
+{{ $matSlugs := dict
+    "ca" ""
+    "es" "material-didactico"
+    "en" "teaching-materials"
+}}
+
+{{ $matTitle := index $matTitles $lang }}
+{{ $matSlug := index $matSlugs $lang }}
+
+{{ $matBody := slice }}
+
+{{ range $materials }}
+    {{ if .authors }}
+        {{ $entry := printf "%s (%d)." .authors (int .year) }}
+
+        {{ if .url }}
+            {{ $entry = printf "%s [%s](%s)." $entry .title .url }}
+        {{ else if .title }}
+            {{ $entry = printf "%s %s." $entry .title }}
+        {{ end }}
+
+        {{ if .publisher }}
+            {{ $entry = printf "%s %s" $entry .publisher }}
+        {{ end }}
+
+        {{ $matBody = $matBody | append $entry }}
+        {{ $matBody = $matBody | append "" }}
+    {{ end }}
+{{ end }}
+
+{{ $matContent := delimit $matBody "\n" }}
+
+{{ $matPage := dict
+    "content" (dict "mediaType" "text/markdown" "value" $matContent)
+    "path"    "material-didactic"
+    "title"   $matTitle
+    "menus"   (dict "main" (dict "weight" 8))
+}}
+
+{{ if $matSlug }}
+    {{ $matPage = merge $matPage (dict "slug" $matSlug) }}
+{{ end }}
+
+{{ .AddPage $matPage }}
