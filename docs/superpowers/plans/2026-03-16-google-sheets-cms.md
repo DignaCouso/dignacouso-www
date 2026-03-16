@@ -39,7 +39,9 @@ Run: `hugo version`
 If below 0.126.0, upgrade Hugo. On Ubuntu/Debian:
 
 ```bash
-# Download the latest extended version
+# Remove existing apt package first to avoid conflicts
+sudo apt remove hugo
+# Download and install the latest extended version
 wget https://github.com/gohugoio/hugo/releases/download/v0.145.0/hugo_extended_0.145.0_linux-amd64.deb
 sudo dpkg -i hugo_extended_0.145.0_linux-amd64.deb
 hugo version
@@ -330,7 +332,7 @@ Create `content/ca/publicacions-cientifiques/_content.gotmpl`:
 {{ $risLabel := dict "ca" "Descarrega totes les publicacions en format RIS (Zotero)" "es" "Descarga todas las publicaciones en formato RIS (Zotero)" "en" "Download all publications in RIS format (Zotero)" }}
 {{ $content = printf "%s[%s](/publications/couso-publications.ris)\n\n" $content (index $risLabel $lang) }}
 
-{{ range $type := $typeOrder }}
+{{ range $idx, $type := $typeOrder }}
   {{ $items := where $data "type" $type }}
   {{ if $items }}
     {{ $heading := index (index $headings $type) $lang }}
@@ -547,7 +549,8 @@ Check all 3 language URLs. Verify menu position, content, and formatting.
 - [ ] **Step 6: Commit**
 
 ```bash
-git add content/{ca,en,es}/projectes-de-recerca/ -u
+git add content/{ca,en,es}/projectes-de-recerca/
+git add -u content/ca/projectes-de-recerca.md content/en/projectes-de-recerca.en.md content/es/projectes-de-recerca.es.md
 git commit -m "Migrate research projects to content adapter"
 ```
 
@@ -574,15 +577,13 @@ Follow same pattern. Key differences:
 
 **Files:**
 - Create: `content/{ca,en,es}/aportacions-a-congressos/_content.gotmpl`
-- Delete: `content/{ca,en,es}/aportacions-a-congressos*.md` and `content/{en,es}/aportaciones-a-congresos*.md`
+- Delete: `content/ca/aportacions-a-congressos.md`, `content/en/aportacions-a-congressos.en.md`, `content/es/aportacions-a-congressos.es.md`
 
 Key differences:
 - Titles: `"ca" "Aportacions a congressos"`, `"es" "Aportaciones a congresos"`, `"en" "Conference contributions"`
 - Slugs: `"es" "aportaciones-a-congresos"`, `"en" "conference-contributions"`
 - Menu weight: 6
 - Section headings for `plenary`, `symposium`, `oral`, `poster`
-
-**Note:** The ES and EN filenames differ from CA (`aportaciones-a-congresos` vs `aportacions-a-congressos`). Delete all variants.
 
 - [ ] **Step 1-6:** Same sequence as Task 5
 
@@ -834,6 +835,9 @@ def main():
         errors = validate_entries(entries, config, tab_name)
         all_errors.extend(errors)
 
+        # Sort by year descending (spec requirement)
+        entries.sort(key=lambda x: x.get("year", 0) if isinstance(x.get("year"), int) else 0, reverse=True)
+
         output_path = Path(config["file"])
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as f:
@@ -888,6 +892,9 @@ on:
     types: [publish]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -919,7 +926,7 @@ jobs:
       - name: Check for changes
         id: changes
         run: |
-          if git diff --quiet data/; then
+          if git diff --quiet data/ && [ -z "$(git status --porcelain data/)" ]; then
             echo "changed=false" >> $GITHUB_OUTPUT
           else
             echo "changed=true" >> $GITHUB_OUTPUT
