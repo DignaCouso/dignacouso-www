@@ -1,0 +1,119 @@
+{{/* Content adapter for data-driven pages – identical file in ca/, en/, es/ */}}
+{{ $lang := .Site.Language.Lang }}
+
+{{/* ======================================================================
+     PUBLICATIONS
+     ====================================================================== */}}
+{{ $pubs := .Site.Data.publications }}
+
+{{/* --- Translated strings ------------------------------------------------ */}}
+{{ $titles := dict
+    "ca" "Publicacions Científiques"
+    "es" "Publicaciones Científicas"
+    "en" "Scientific Publications"
+}}
+
+{{ $slugs := dict
+    "ca" ""
+    "es" "publicaciones-cientificas"
+    "en" "scientific-publications"
+}}
+
+{{ $downloadLabels := dict
+    "ca" "Descarrega en format RIS"
+    "es" "Descargar en formato RIS"
+    "en" "Download in RIS format"
+}}
+
+{{ $headings := dict
+    "indexed-jcr" (dict
+        "ca" "Articles en revistes indexades (JCR, SJR, SCOPUS)"
+        "es" "Artículos en revistas indexadas (JCR, SJR, SCOPUS)"
+        "en" "Publications on journals with impact factor (JCR, SJR, SCOPUS)"
+    )
+    "indexed-other" (dict
+        "ca" "Articles en revistes indexades en altres índex"
+        "es" "Artículos en revistas indexadas en otros índices"
+        "en" "Publications on journals with impact factor in other index"
+    )
+    "non-indexed" (dict
+        "ca" "Articles en revistes no indexades amb avaluació externa"
+        "es" "Artículos en revistas no indexadas con evaluación externa"
+        "en" "Publications on journals without impact factor but with external peer review"
+    )
+    "conference-derived" (dict
+        "ca" "Publicacions derivades de congressos"
+        "es" "Publicaciones derivadas de congresos"
+        "en" "Publications derived from conferences"
+    )
+    "other" (dict
+        "ca" "Altres publicacions"
+        "es" "Otras publicaciones"
+        "en" "Other publications"
+    )
+}}
+
+{{/* --- Build the markdown body ------------------------------------------- */}}
+{{ $title := index $titles $lang }}
+{{ $slug  := index $slugs  $lang }}
+{{ $dlLabel := index $downloadLabels $lang }}
+
+{{ $body := slice }}
+{{ $body = $body | append (printf "[%s](/publications/couso-publications.ris)" $dlLabel) }}
+{{ $body = $body | append "" }}
+
+{{ $typeOrder := slice "indexed-jcr" "indexed-other" "non-indexed" "conference-derived" "other" }}
+
+{{ range $idx, $type := $typeOrder }}
+    {{ $heading := index (index $headings $type) $lang }}
+    {{ $body = $body | append (printf "**%s:**" $heading) }}
+    {{ $body = $body | append "" }}
+
+    {{ range $pubs }}
+        {{ if eq .type $type }}
+            {{/* Format: Authors (Year). [Title](URL). *Journal, Volume*(Issue), Pages */}}
+            {{ $entry := printf "%s (%d)." .authors (int .year) }}
+
+            {{ if .url }}
+                {{ $entry = printf "%s [%s](%s)." $entry .title .url }}
+            {{ else }}
+                {{ $entry = printf "%s %s." $entry .title }}
+            {{ end }}
+
+            {{ if .journal }}
+                {{ $journal := printf "*%s" .journal }}
+                {{ if .volume }}
+                    {{ $journal = printf "%s, %s" $journal .volume }}
+                {{ end }}
+                {{ if .issue }}
+                    {{ $journal = printf "%s*(%s)" $journal .issue }}
+                {{ else }}
+                    {{ $journal = printf "%s*" $journal }}
+                {{ end }}
+                {{ if .pages }}
+                    {{ $journal = printf "%s, %s" $journal .pages }}
+                {{ end }}
+                {{ $entry = printf "%s %s" $entry $journal }}
+            {{ end }}
+
+            {{ $body = $body | append $entry }}
+            {{ $body = $body | append "" }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $content := delimit $body "\n" }}
+
+{{/* --- AddPage ----------------------------------------------------------- */}}
+{{ $page := dict
+    "content" (dict "mediaType" "text/markdown" "value" $content)
+    "path"    "publicacions-cientifiques"
+    "title"   $title
+    "menus"   (dict "main" (dict "weight" 4))
+}}
+
+{{ if $slug }}
+    {{ $page = merge $page (dict "slug" $slug) }}
+{{ end }}
+
+{{ .AddPage $page }}
