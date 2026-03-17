@@ -16,11 +16,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install dependencies
-        run: pip install -r scripts/requirements.txt
       - name: Fetch sheet data and generate JSON
         env:
-          GOOGLE_SHEETS_KEY: ${{ secrets.GOOGLE_SHEETS_KEY }}
           GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
         run: python3 scripts/sheet_to_json.py
       - name: Setup Hugo

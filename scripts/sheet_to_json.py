@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Fetch data from Google Sheets tabs and write JSON data files."""
+"""Fetch data from a public Google Sheet (CSV export) and write JSON data files."""
 
+import csv
+import io
 import json
 import os
 import sys
-
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
+import urllib.error
+import urllib.parse
+import urllib.request
 
 # Tab-to-file mapping with required fields and enum validation.
 TAB_CONFIG = {
@@ -48,7 +50,6 @@ TAB_CONFIG = {
     "Talks": {
         "file": "data/talks.json",
         "required": ["year", "title"],
-        "enums": {},
     },
     "Contracts": {
         "file": "data/contracts.json",
@@ -68,58 +69,41 @@ TAB_CONFIG = {
     "Materials": {
         "file": "data/materials.json",
         "required": ["year", "title"],
-        "enums": {},
     },
 }
 
-SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
-
-def get_sheets_service():
-    """Build and return a Google Sheets API service."""
-    key_json = os.environ.get("GOOGLE_SHEETS_KEY")
-    if not key_json:
-        print("ERROR: GOOGLE_SHEETS_KEY environment variable is not set.")
-        sys.exit(1)
-
-    sheet_id = os.environ.get("GOOGLE_SHEET_ID")
-    if not sheet_id:
-        print("ERROR: GOOGLE_SHEET_ID environment variable is not set.")
-        sys.exit(1)
-
-    creds_info = json.loads(key_json)
-    creds = service_account.Credentials.from_service_account_info(
-        creds_info, scopes=SCOPES
+def fetch_tab(sheet_id, tab_name):
+    """Fetch all rows from a public sheet tab via CSV export."""
+    url = (
+        f"https://docs.google.com/spreadsheets/d/{sheet_id}"
+        f"/gviz/tq?tqx=out:csv&sheet={urllib.parse.quote(tab_name)}"
     )
-    service = build("sheets", "v4", credentials=creds)
-    return service.spreadsheets(), sheet_id
+    try:
+        with urllib.request.urlopen(url, timeout=30) as resp:
+            text = resp.read().decode("utf-8")
+    except urllib.error.HTTPError as e:
+        print(f"ERROR: Failed to fetch tab '{tab_name}': HTTP {e.code}")
+        print("  Is the Google Sheet set to 'Anyone with the link can view'?")
+        sys.exit(1)
+    except urllib.error.URLError as e:
+        print(f"ERROR: Failed to fetch tab '{tab_name}': {e.reason}")
+        sys.exit(1)
 
-
-def fetch_tab(sheets, sheet_id, tab_name):
-    """Fetch all rows from a tab and return list of dicts."""
-    result = sheets.values().get(
-        spreadsheetId=sheet_id, range=f"{tab_name}!A:ZZ"
-    ).execute()
-    rows = result.get("values", [])
-    if len(rows) < 2:
+    reader = csv.DictReader(io.StringIO(text))
+    # Normalize headers to lowercase stripped
+    if reader.fieldnames is None:
         return []
+    clean_fieldnames = [h.strip().lower() for h in reader.fieldnames]
+    reader.fieldnames = clean_fieldnames
 
-    headers = [h.strip().lower() for h in rows[0]]
     entries = []
-    for row in rows[1:]:
-        # Skip empty rows
-        if not any(cell.strip() for cell in row if cell):
-            continue
+    for row in reader:
         entry = {}
-        for i, header in enumerate(headers):
-            if not header:
+        for key, value in row.items():
+            if not key:
                 continue
-            value = row[i].strip() if i < len(row) else ""
-            # Strip whitespace-only cells to empty string
-            if not value:
-                value = ""
-            entry[header] = value
-        # Skip rows where all values are empty
+            entry[key] = value.strip() if value else ""
         if not any(entry.values()):
             continue
         entries.append(entry)
@@ -155,7 +139,7 @@ def validate(entries, tab_name, config):
         row_num = i + 2  # 1-indexed, skip header row
         for field in required:
             val = entry.get(field, "")
-            if val == "" or (isinstance(val, str) and not val.strip()):
+            if val == "":
                 errors.append(
                     f"{tab_name} row {row_num}: missing required field '{field}'"
                 )
@@ -179,12 +163,16 @@ def write_json(filepath, entries):
 
 
 def main():
-    sheets, sheet_id = get_sheets_service()
+    sheet_id = os.environ.get("GOOGLE_SHEET_ID")
+    if not sheet_id:
+        print("ERROR: GOOGLE_SHEET_ID environment variable is not set.")
+        sys.exit(1)
+
     all_errors = []
 
     for tab_name, config in TAB_CONFIG.items():
         print(f"Processing tab: {tab_name}")
-        entries = fetch_tab(sheets, sheet_id, tab_name)
+        entries = fetch_tab(sheet_id, tab_name)
         entries = convert_year(entries)
         entries = sort_by_year(entries)
 

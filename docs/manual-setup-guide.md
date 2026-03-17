@@ -1,35 +1,14 @@
 # Google Sheets CMS — Manual Setup Guide
 
-These are the remaining steps to complete the Google Sheets CMS setup. All code and automation is already in place on the `feature/google-sheets-cms` branch.
+These are the remaining steps to complete the Google Sheets CMS setup. All code and automation is already in place.
 
-## 1. Create a Google Cloud Service Account
-
-1. Go to https://console.cloud.google.com/
-2. Create a new project (e.g., "dignacouso-cms") or use an existing one
-3. Enable the **Google Sheets API**:
-   - Go to APIs & Services > Library
-   - Search for "Google Sheets API"
-   - Click Enable
-4. Create a service account:
-   - Go to APIs & Services > Credentials
-   - Click "Create Credentials" > "Service Account"
-   - Name it something like "sheets-reader"
-   - No need to grant any roles, just click through
-5. Create a key for the service account:
-   - Click on the service account you just created
-   - Go to the "Keys" tab
-   - Click "Add Key" > "Create new key" > JSON
-   - Download the JSON file — you'll need its contents later
-6. Copy the service account email (looks like `sheets-reader@project-name.iam.gserviceaccount.com`) — you'll need it in step 3
-
-## 2. Add GitHub Secrets
+## 1. Add GitHub Secret
 
 Go to https://github.com/DignaCouso/dignacouso-www/settings/secrets/actions and add:
 
-- **`GOOGLE_SHEETS_KEY`**: Paste the entire contents of the service account JSON key file you downloaded in step 1
-- **`GOOGLE_SHEET_ID`**: The Sheet ID (you'll get this in step 3 — come back to add it after creating the sheet)
+- **`GOOGLE_SHEET_ID`**: The Sheet ID (you'll get this in step 2 — come back to add it after creating the sheet)
 
-## 3. Create and Populate the Google Sheet
+## 2. Create and Populate the Google Sheet
 
 ### Generate CSVs from current data
 
@@ -51,7 +30,7 @@ This creates CSV files in `sheets_csv/`:
    ```
    https://docs.google.com/spreadsheets/d/THIS_IS_THE_SHEET_ID/edit
    ```
-4. Go back to GitHub secrets (step 2) and add this as `GOOGLE_SHEET_ID`
+4. Go back to GitHub secrets (step 1) and add this as `GOOGLE_SHEET_ID`
 
 ### Import the CSVs
 
@@ -65,12 +44,12 @@ For each CSV file:
    - `Publications`, `Projects`, `Books`, `Conferences`, `Talks`, `Contracts`, `Theses`, `Materials`
 6. Delete the default empty "Sheet1" tab
 
-### Share with the service account
+### Make the sheet public
 
 1. Click the "Share" button in the top-right of the Google Sheet
-2. Add the service account email from step 1 (e.g., `sheets-reader@project-name.iam.gserviceaccount.com`)
-3. Set permission to **Viewer** (read-only is sufficient)
-4. Uncheck "Notify people" and click Share
+2. Under "General access", change from "Restricted" to **"Anyone with the link"**
+3. Set the role to **Viewer**
+4. Click "Done"
 
 ### Set up sheet protections
 
@@ -88,7 +67,7 @@ For each tab:
    - Data > Protect sheets and ranges
    - Set permissions so only you can edit
 
-## 4. Create a GitHub Personal Access Token
+## 3. Create a GitHub Personal Access Token
 
 1. Go to https://github.com/settings/tokens?type=beta (fine-grained tokens)
 2. Click "Generate new token"
@@ -100,7 +79,7 @@ For each tab:
 7. Click "Generate token"
 8. Copy the token — you'll need it in the next step
 
-## 5. Add the Publish Button (Google Apps Script)
+## 4. Add the Publish Button (Google Apps Script)
 
 1. In the Google Sheet, go to Extensions > Apps Script
 2. Delete any existing code in the editor
@@ -143,12 +122,12 @@ function onOpen() {
    - Scroll down to "Script Properties"
    - Click "Add script property"
    - Property: `GITHUB_TOKEN`
-   - Value: paste the personal access token from step 4
+   - Value: paste the personal access token from step 3
    - Click Save
 7. Go back to the Google Sheet and reload the page
 8. After reloading, a **"Website"** menu should appear in the menu bar
 
-## 6. End-to-End Test
+## 5. End-to-End Test
 
 1. In the Google Sheet, go to the "Materials" tab (simplest content type)
 2. Add a test row at the bottom:
@@ -179,7 +158,7 @@ function onOpen() {
 **GitHub Action fails:**
 - Go to https://github.com/DignaCouso/dignacouso-www/actions and click the failed run
 - Check the logs for error details
-- Common issues: GOOGLE_SHEETS_KEY or GOOGLE_SHEET_ID secrets missing/wrong, sheet not shared with service account
+- Common issues: GOOGLE_SHEET_ID secret missing/wrong, sheet not set to public
 
 **Site doesn't update after successful Action:**
 - Check Netlify deploys at https://app.netlify.com/ — it should auto-deploy on push
