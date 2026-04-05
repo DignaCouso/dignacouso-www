@@ -158,7 +158,6 @@ Types: `plenary`, `symposium`, `oral`, `poster`
 ```json
 [
   {
-    "code": "C-12345",
     "title": "Contract title",
     "entity": "Fundacio La Caixa",
     "budget": "50.000\u20ac",
