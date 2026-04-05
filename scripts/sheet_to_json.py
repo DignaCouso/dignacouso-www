@@ -5,10 +5,10 @@ import csv
 import io
 import json
 import os
+import re
 import sys
-import urllib.error
-import urllib.parse
-import urllib.request
+
+import requests
 
 # Tab-to-file mapping with required fields and enum validation.
 TAB_CONFIG = {
@@ -77,17 +77,18 @@ def fetch_tab(sheet_id, tab_name):
     """Fetch all rows from a public sheet tab via CSV export."""
     url = (
         f"https://docs.google.com/spreadsheets/d/{sheet_id}"
-        f"/gviz/tq?tqx=out:csv&sheet={urllib.parse.quote(tab_name)}"
+        f"/gviz/tq?tqx=out:csv&sheet={requests.utils.quote(tab_name)}"
     )
     try:
-        with urllib.request.urlopen(url, timeout=30) as resp:
-            text = resp.read().decode("utf-8")
-    except urllib.error.HTTPError as e:
-        print(f"ERROR: Failed to fetch tab '{tab_name}': HTTP {e.code}")
+        resp = requests.get(url, timeout=30)
+        resp.raise_for_status()
+        text = resp.text
+    except requests.exceptions.HTTPError as e:
+        print(f"ERROR: Failed to fetch tab '{tab_name}': HTTP {e.response.status_code}")
         print("  Is the Google Sheet set to 'Anyone with the link can view'?")
         sys.exit(1)
-    except urllib.error.URLError as e:
-        print(f"ERROR: Failed to fetch tab '{tab_name}': {e.reason}")
+    except requests.exceptions.RequestException as e:
+        print(f"ERROR: Failed to fetch tab '{tab_name}': {e}")
         sys.exit(1)
 
     reader = csv.DictReader(io.StringIO(text))
@@ -167,6 +168,9 @@ def main():
     if not sheet_id:
         print("ERROR: GOOGLE_SHEET_ID environment variable is not set.")
         sys.exit(1)
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", sheet_id):
+        print("ERROR: GOOGLE_SHEET_ID contains invalid characters.")
+        sys.exit(1)
 
     all_errors = []
 
@@ -177,6 +181,10 @@ def main():
         entries = sort_by_year(entries)
 
         errors = validate(entries, tab_name, config)
+        if errors:
+            print(f"  Fields found: {list(entries[0].keys()) if entries else '(none)'}")
+            if entries:
+                print(f"  First entry: {entries[0]}")
         all_errors.extend(errors)
 
         # Write files even if validation fails (for debugging)
