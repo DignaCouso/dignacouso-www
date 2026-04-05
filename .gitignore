@@ -7,3 +7,6 @@
 
 # CSV exports for Google Sheets import
 /sheets_csv
+
+# Git worktrees
+/.worktrees
