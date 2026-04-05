@@ -77,7 +77,7 @@ def fetch_tab(sheet_id, tab_name):
     """Fetch all rows from a public sheet tab via CSV export."""
     url = (
         f"https://docs.google.com/spreadsheets/d/{sheet_id}"
-        f"/gviz/tq?tqx=out:csv&sheet={requests.utils.quote(tab_name)}"
+        f"/export?format=csv&sheet={requests.utils.quote(tab_name)}"
     )
     try:
         resp = requests.get(url, timeout=30)
