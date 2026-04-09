@@ -67,67 +67,19 @@ For each tab:
    - Data > Protect sheets and ranges
    - Set permissions so only you can edit
 
-## 3. Create a GitHub Personal Access Token
+## 3. Publishing
 
-1. Go to https://github.com/settings/tokens?type=beta (fine-grained tokens)
-2. Click "Generate new token"
-3. Name it "Sheets Publish Button"
-4. Set expiration (e.g., 1 year — you'll need to regenerate when it expires)
-5. Under "Repository access", select "Only select repositories" and choose `DignaCouso/dignacouso-www`
-6. Under "Permissions" > "Repository permissions", set:
-   - **Contents**: Read and write
-7. Click "Generate token"
-8. Copy the token — you'll need it in the next step
+Publishing is automatic. A GitHub Action runs every hour on the top of the hour (see `.github/workflows/publish.yml`), fetches all sheet tabs, regenerates the JSON in `data/`, and only commits/pushes when something actually changed. Netlify redeploys the site on each push to `main`.
 
-## 4. Add the Publish Button (Google Apps Script)
+If you want to publish immediately without waiting for the next hourly run:
 
-1. In the Google Sheet, go to Extensions > Apps Script
-2. Delete any existing code in the editor
-3. Paste this code:
+1. Go to https://github.com/DignaCouso/dignacouso-www/actions
+2. Click the **"Publish from Google Sheets (hourly)"** workflow in the left sidebar
+3. Click **"Run workflow"** > **"Run workflow"**
 
-```javascript
-function publish() {
-  var token = PropertiesService.getScriptProperties().getProperty('GITHUB_TOKEN');
-  var response = UrlFetchApp.fetch(
-    'https://api.github.com/repos/DignaCouso/dignacouso-www/dispatches',
-    {
-      method: 'post',
-      headers: {
-        'Authorization': 'token ' + token,
-        'Accept': 'application/vnd.github.v3+json'
-      },
-      payload: JSON.stringify({ event_type: 'publish' }),
-      muteHttpExceptions: true
-    }
-  );
-  if (response.getResponseCode() === 204) {
-    SpreadsheetApp.getUi().alert('Publishing! The site will update in ~2 minutes.');
-  } else {
-    SpreadsheetApp.getUi().alert('Error: ' + response.getContentText());
-  }
-}
+Note: scheduled GitHub Actions can be delayed by 5–15 minutes under load. This is normal.
 
-function onOpen() {
-  SpreadsheetApp.getUi()
-    .createMenu('Website')
-    .addItem('Publish', 'publish')
-    .addToUi();
-}
-```
-
-4. Click the save icon (or Ctrl+S)
-5. Name the project "Publish to Website"
-6. Store the GitHub token:
-   - In the Apps Script editor, click the gear icon (Project Settings) on the left
-   - Scroll down to "Script Properties"
-   - Click "Add script property"
-   - Property: `GITHUB_TOKEN`
-   - Value: paste the personal access token from step 3
-   - Click Save
-7. Go back to the Google Sheet and reload the page
-8. After reloading, a **"Website"** menu should appear in the menu bar
-
-## 5. End-to-End Test
+## 4. End-to-End Test
 
 1. In the Google Sheet, go to the "Materials" tab (simplest content type)
 2. Add a test row at the bottom:
@@ -136,30 +88,30 @@ function onOpen() {
    - title: `Test Entry — Delete Me`
    - publisher: `Test Publisher`
    - url: (leave empty)
-3. Click **Website > Publish** in the menu bar
-4. You may need to authorize the script the first time (click through the Google permissions)
-5. Wait ~2 minutes
-6. Check the results:
-   - GitHub Actions: go to https://github.com/DignaCouso/dignacouso-www/actions — the workflow should show a successful run
-   - Live site: go to https://dignacouso.me/material-didactic/ — the test entry should appear
-7. **Remove the test entry**: delete the row from the sheet, click Publish again, verify it disappears from the site
+3. Trigger the workflow manually from the Actions UI (see step 3 above), or wait for the next hourly run
+4. Check the results:
+   - GitHub Actions: the workflow should show a successful run
+   - Live site: https://dignacouso.me/material-didactic/ — the test entry should appear
+5. **Remove the test entry**: delete the row from the sheet, trigger the workflow again, verify it disappears from the site
+
+## 5. Cleanup (if upgrading from the old Apps Script publish flow)
+
+The previous setup used a Google Apps Script in the sheet to call the GitHub API directly. That is no longer needed:
+
+- **Delete the Apps Script**: in the Google Sheet, Extensions > Apps Script, delete the project.
+- **Revoke the old GitHub PAT**: go to https://github.com/settings/tokens and delete the fine-grained token that was used by the Apps Script.
 
 ## Troubleshooting
-
-**"Website" menu doesn't appear:**
-- Reload the Google Sheet page
-- Make sure the Apps Script was saved without errors
-
-**Publish button shows an error:**
-- Check that the GitHub token is stored correctly in Script Properties
-- Check that the token has "Contents: Read and write" permission on the repo
-- Check that the token hasn't expired
 
 **GitHub Action fails:**
 - Go to https://github.com/DignaCouso/dignacouso-www/actions and click the failed run
 - Check the logs for error details
-- Common issues: GOOGLE_SHEET_ID secret missing/wrong, sheet not set to public
+- Common issues: `GOOGLE_SHEET_ID` secret missing/wrong, sheet not set to public
 
-**Site doesn't update after successful Action:**
+**Site doesn't update after a successful Action run:**
+- The run may have detected no changes — check the "Check for changes" step output
 - Check Netlify deploys at https://app.netlify.com/ — it should auto-deploy on push
 - The branch must be set as the production branch in Netlify
+
+**Edit in the sheet hasn't appeared yet:**
+- The cron runs hourly and can be delayed up to ~15 minutes. Trigger manually from the Actions UI if you need it sooner.
