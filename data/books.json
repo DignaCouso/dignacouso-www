@@ -300,18 +300,6 @@
     "type": "proceedings"
   },
   {
-    "year": 2011,
-    "authors": "",
-    "title": "",
-    "book_title": "",
-    "publisher": "",
-    "pages": "",
-    "isbn": "",
-    "doi": "",
-    "url": "",
-    "type": "edited-book"
-  },
-  {
     "year": 2010,
     "authors": "Pintó, R., Couso, D., Hernández, M.I",
     "title": "Modelling and Inquiring Sound Attenuation: Design-Based Research about an ICT-Enhanced Unit on Materials Science",
@@ -339,7 +327,7 @@
     "year": 2010,
     "authors": "Lavonen, J., Byman, R., Loukomies, A., Meisalo, V., Constantinou, C., Kyratsi, T., Papadouris, N., Couso, D., Hernandez,M .I., Pinto, R., Hatzikraniotis, E., Kallery, M., Petridou, E., Psillos, D., Kariotoglou, P., Pnevmatikos, D., Spyrtou, A., Lombardi, S., Monroy, G., Testa, I. *",
     "title": "Students' motivation on learning material science teaching modules in five countries",
-    "book_title": "(2010)",
+    "book_title": "-2010",
     "publisher": "",
     "pages": "",
     "isbn": "",
@@ -550,17 +538,5 @@
     "doi": "",
     "url": "",
     "type": "chapter"
-  },
-  {
-    "year": 0,
-    "authors": "",
-    "title": "",
-    "book_title": "Enseñando Ciencia con Ciencia",
-    "publisher": "",
-    "pages": "",
-    "isbn": "",
-    "doi": "",
-    "url": "",
-    "type": "edited-book"
   }
 ]

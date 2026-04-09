@@ -26,8 +26,7 @@
     "type": "phd",
     "university": "UAB",
     "role": "co-director",
-    "status": "in-progress",
-    "url": ""
+    "status": "in-progress"
   },
   {
     "year": 2019,
@@ -42,22 +41,11 @@
   {
     "year": 2018,
     "author": "Vergara, C",
-    "title": "",
-    "type": "phd",
-    "university": "UAB",
-    "role": "co-director",
-    "status": "in-progress",
-    "url": ""
-  },
-  {
-    "year": 2018,
-    "author": "Vergara, C",
     "title": "Ideas del estudiantado para explicar los mecanismos de regulación térmica de algunos animales",
     "type": "master",
     "university": "",
     "role": "co-director",
-    "status": "completed",
-    "url": ""
+    "status": "completed"
   },
   {
     "year": 2017,
@@ -66,8 +54,7 @@
     "type": "phd",
     "university": "UAB",
     "role": "director",
-    "status": "in-progress",
-    "url": ""
+    "status": "in-progress"
   },
   {
     "year": 2017,
@@ -76,8 +63,7 @@
     "type": "phd",
     "university": "UAB",
     "role": "co-director",
-    "status": "in-progress",
-    "url": ""
+    "status": "in-progress"
   },
   {
     "year": 2017,
@@ -126,8 +112,7 @@
     "type": "master",
     "university": "",
     "role": "director",
-    "status": "completed",
-    "url": ""
+    "status": "completed"
   },
   {
     "year": 2015,
@@ -186,8 +171,7 @@
     "type": "phd",
     "university": "UAB",
     "role": "co-director",
-    "status": "in-progress",
-    "url": ""
+    "status": "in-progress"
   },
   {
     "year": 2012,
@@ -226,7 +210,6 @@
     "type": "master",
     "university": "",
     "role": "director",
-    "status": "completed",
-    "url": ""
+    "status": "completed"
   }
 ]
