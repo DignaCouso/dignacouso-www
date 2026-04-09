@@ -1,14 +1,34 @@
 #!/usr/bin/env python3
-"""Fetch data from a public Google Sheet (CSV export) and write JSON data files."""
+"""Fetch data from a public Google Sheet (XLSX export) and write JSON data files."""
 
-import csv
+import datetime
 import io
 import json
 import os
 import re
 import sys
 
+import openpyxl
 import requests
+
+
+def cell_to_str(value):
+    """Normalize an openpyxl cell value to a string, matching CSV-export behavior."""
+    if value is None:
+        return ""
+    if isinstance(value, str):
+        return value.strip()
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, float):
+        # Render whole-number floats without a trailing ".0" (Sheets exports ints as floats sometimes).
+        if value.is_integer():
+            return str(int(value))
+        return str(value)
+    if isinstance(value, (datetime.datetime, datetime.date)):
+        return value.isoformat()
+    return str(value)
+
 
 # Tab-to-file mapping with required fields and enum validation.
 TAB_CONFIG = {
@@ -73,38 +93,53 @@ TAB_CONFIG = {
 }
 
 
-def fetch_tab(sheet_id, tab_name):
-    """Fetch all rows from a public sheet tab via CSV export."""
+def fetch_workbook(sheet_id):
+    """Download the entire Google Sheet as an XLSX workbook."""
     url = (
         f"https://docs.google.com/spreadsheets/d/{sheet_id}"
-        f"/export?format=csv&sheet={requests.utils.quote(tab_name)}"
+        f"/export?format=xlsx"
     )
     try:
-        resp = requests.get(url, timeout=30)
+        resp = requests.get(url, timeout=60)
         resp.raise_for_status()
-        text = resp.text
     except requests.exceptions.HTTPError as e:
-        print(f"ERROR: Failed to fetch tab '{tab_name}': HTTP {e.response.status_code}")
+        print(f"ERROR: Failed to fetch workbook: HTTP {e.response.status_code}")
         print("  Is the Google Sheet set to 'Anyone with the link can view'?")
         sys.exit(1)
     except requests.exceptions.RequestException as e:
-        print(f"ERROR: Failed to fetch tab '{tab_name}': {e}")
+        print(f"ERROR: Failed to fetch workbook: {e}")
         sys.exit(1)
 
-    reader = csv.DictReader(io.StringIO(text))
-    # Normalize headers to lowercase stripped
-    if reader.fieldnames is None:
+    return openpyxl.load_workbook(io.BytesIO(resp.content), data_only=True, read_only=True)
+
+
+def extract_tab(workbook, tab_name):
+    """Extract rows from a worksheet by name as list of dicts with lowercased headers."""
+    if tab_name not in workbook.sheetnames:
+        print(f"ERROR: Tab '{tab_name}' not found in workbook.")
+        print(f"  Available tabs: {workbook.sheetnames}")
+        sys.exit(1)
+
+    ws = workbook[tab_name]
+    rows = ws.iter_rows(values_only=True)
+
+    try:
+        header_row = next(rows)
+    except StopIteration:
         return []
-    clean_fieldnames = [h.strip().lower() for h in reader.fieldnames]
-    reader.fieldnames = clean_fieldnames
+
+    headers = [
+        str(h).strip().lower() if h is not None else ""
+        for h in header_row
+    ]
 
     entries = []
-    for row in reader:
+    for row in rows:
         entry = {}
-        for key, value in row.items():
+        for key, value in zip(headers, row):
             if not key:
                 continue
-            entry[key] = value.strip() if value else ""
+            entry[key] = cell_to_str(value)
         if not any(entry.values()):
             continue
         entries.append(entry)
@@ -172,11 +207,15 @@ def main():
         print("ERROR: GOOGLE_SHEET_ID contains invalid characters.")
         sys.exit(1)
 
+    print("Fetching workbook...")
+    workbook = fetch_workbook(sheet_id)
+    print(f"  Tabs available: {workbook.sheetnames}")
+
     all_errors = []
 
     for tab_name, config in TAB_CONFIG.items():
         print(f"Processing tab: {tab_name}")
-        entries = fetch_tab(sheet_id, tab_name)
+        entries = extract_tab(workbook, tab_name)
         entries = convert_year(entries)
         entries = sort_by_year(entries)
 
