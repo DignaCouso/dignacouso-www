@@ -13,23 +13,65 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+
+      - name: Restore sheet hash cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .sheet-hash-cache
+          key: sheet-hash-
+          restore-keys: sheet-hash-
+
+      - name: Download spreadsheet
+        run: |
+          curl -fsSL -o sheet.xlsx \
+            "https://docs.google.com/spreadsheets/d/${{ secrets.GOOGLE_SHEET_ID }}/export?format=xlsx"
+
+      - name: Check if sheet changed
+        id: sheet
+        run: |
+          sha256sum sheet.xlsx | awk '{print $1}' > sheet.xlsx.sha256
+          if [ -f .sheet-hash-cache/sheet.xlsx.sha256 ] && diff -q sheet.xlsx.sha256 .sheet-hash-cache/sheet.xlsx.sha256 >/dev/null 2>&1; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "Sheet unchanged, skipping build."
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Sheet changed, proceeding with build."
+          fi
+
+      - name: Update hash cache
+        if: steps.sheet.outputs.changed == 'true'
+        run: |
+          mkdir -p .sheet-hash-cache
+          cp sheet.xlsx.sha256 .sheet-hash-cache/
+
+      - name: Save sheet hash cache
+        if: steps.sheet.outputs.changed == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .sheet-hash-cache
+          key: sheet-hash-${{ hashFiles('sheet.xlsx.sha256') }}
+
       - uses: actions/setup-python@v6
+        if: steps.sheet.outputs.changed == 'true'
         with:
           python-version: "3.12"
       - name: Install Python dependencies
+        if: steps.sheet.outputs.changed == 'true'
         run: pip install -r requirements.txt
       - name: Fetch sheet data and generate JSON
-        env:
-          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
-        run: python3 scripts/sheet_to_json.py
+        if: steps.sheet.outputs.changed == 'true'
+        run: python3 scripts/sheet_to_json.py --xlsx sheet.xlsx
       - name: Setup Hugo
+        if: steps.sheet.outputs.changed == 'true'
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: "0.145.0"
           extended: true
       - name: Verify Hugo build
+        if: steps.sheet.outputs.changed == 'true'
         run: hugo --gc --minify
       - name: Check for changes
+        if: steps.sheet.outputs.changed == 'true'
         id: changes
         run: |
           if git diff --quiet data/ && [ -z "$(git status --porcelain data/)" ]; then
@@ -38,7 +80,7 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
       - name: Commit and push
-        if: steps.changes.outputs.changed == 'true'
+        if: steps.sheet.outputs.changed == 'true' && steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

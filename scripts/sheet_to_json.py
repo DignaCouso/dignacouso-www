@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Fetch data from a public Google Sheet (XLSX export) and write JSON data files."""
 
+import argparse
 import datetime
 import io
 import json
@@ -198,17 +199,35 @@ def write_json(filepath, entries):
     print(f"  Wrote {len(entries)} entries to {filepath}")
 
 
-def main():
-    sheet_id = os.environ.get("GOOGLE_SHEET_ID")
-    if not sheet_id:
-        print("ERROR: GOOGLE_SHEET_ID environment variable is not set.")
-        sys.exit(1)
-    if not re.fullmatch(r"[A-Za-z0-9_-]+", sheet_id):
-        print("ERROR: GOOGLE_SHEET_ID contains invalid characters.")
-        sys.exit(1)
+def load_workbook_from_file(path):
+    """Load an XLSX workbook from a local file."""
+    return openpyxl.load_workbook(path, data_only=True, read_only=True)
 
-    print("Fetching workbook...")
-    workbook = fetch_workbook(sheet_id)
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--xlsx",
+        metavar="PATH",
+        help="Use a local XLSX file instead of downloading from Google Sheets",
+    )
+    args = parser.parse_args()
+
+    if args.xlsx:
+        print(f"Loading workbook from {args.xlsx}...")
+        workbook = load_workbook_from_file(args.xlsx)
+    else:
+        sheet_id = os.environ.get("GOOGLE_SHEET_ID")
+        if not sheet_id:
+            print("ERROR: GOOGLE_SHEET_ID environment variable is not set.")
+            sys.exit(1)
+        if not re.fullmatch(r"[A-Za-z0-9_-]+", sheet_id):
+            print("ERROR: GOOGLE_SHEET_ID contains invalid characters.")
+            sys.exit(1)
+
+        print("Fetching workbook...")
+        workbook = fetch_workbook(sheet_id)
+
     print(f"  Tabs available: {workbook.sheetnames}")
 
     all_errors = []
